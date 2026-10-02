@@ -13,6 +13,8 @@ import { ServicesPage } from './pages/ServicesPage';
 import { StackPage } from './pages/StackPage';
 import { WorkPage } from './pages/WorkPage';
 import { AiLabPage } from './pages/AiLabPage';
+import { CertificatesPage } from './pages/CertificatesPage';
+import { ResumePage } from './pages/ResumePage';
 import { ContactPage } from './pages/ContactPage';
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
           <Route path="/stack" element={<StackPage />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/ai-lab" element={<AiLabPage />} />
+          <Route path="/certificates" element={<CertificatesPage />} />
+          <Route path="/resume" element={<ResumePage />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* Fallback route */}
           <Route path="*" element={<HomePage isReady={isReady} />} />

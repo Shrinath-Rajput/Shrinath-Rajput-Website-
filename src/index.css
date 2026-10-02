@@ -18,14 +18,19 @@
   }
 }
 
-/* Container Utility */
-.site-container {
-  width: 100%;
-  max-width: 1400px;
+/* Full-Width Content Container System */
+.site-container,
+.page-container,
+.services-container,
+.about-container,
+.contact-container {
+  width: min(94vw, 1820px);
+  max-width: 1820px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 5vw, 4rem);
-  padding-right: clamp(1.25rem, 5vw, 4rem);
+  padding-left: clamp(24px, 3.5vw, 64px);
+  padding-right: clamp(24px, 3.5vw, 64px);
+  box-sizing: border-box;
 }
 
 .section-padding {

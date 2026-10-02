@@ -24,6 +24,8 @@ export const Navbar = () => {
     { label: 'STACK', path: '/stack' },
     { label: 'WORK', path: '/work' },
     { label: 'AI LAB', path: '/ai-lab' },
+    { label: 'CERTIFICATES', path: '/certificates' },
+    { label: 'RESUME', path: '/resume' },
     { label: 'CONTACT', path: '/contact' },
   ];
 
@@ -202,26 +204,49 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* Mobile Drawer Navigation with frosted glass styling */}
+      {/* Mobile Drawer Navigation Backdrop Overlay */}
       {mobileMenuOpen && (
         <div
+          onClick={() => setMobileMenuOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 8998,
+            backgroundColor: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            transition: 'opacity 0.3s ease',
+          }}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile Floating Glass Navigation Panel */}
+      {mobileMenuOpen && (
+        <div
+          className="mobile-nav-panel glass-reflection"
           style={{
             position: 'fixed',
             top: '5.2rem',
-            left: '5%',
-            right: '5%',
+            left: 'clamp(14px, 4vw, 24px)',
+            right: 'clamp(14px, 4vw, 24px)',
+            maxWidth: '520px',
+            margin: '0 auto',
             zIndex: 8999,
-            borderRadius: '24px',
-            background: 'rgba(10, 15, 18, 0.94)',
-            backdropFilter: 'blur(24px)',
-            WebkitBackdropFilter: 'blur(24px)',
-            border: '1px solid rgba(255, 255, 255, 0.16)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(200, 255, 0, 0.06)',
-            padding: '2rem',
+            borderRadius: '26px',
+            background:
+              'linear-gradient(135deg, rgba(20, 26, 38, 0.92) 0%, rgba(10, 14, 22, 0.96) 100%)',
+            backdropFilter: 'blur(28px) saturate(170%)',
+            WebkitBackdropFilter: 'blur(28px) saturate(170%)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            boxShadow:
+              '0 25px 70px rgba(0, 0, 0, 0.75), 0 0 35px rgba(200, 255, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.22)',
+            padding: '1.75rem 1.25rem',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.5rem',
+            alignItems: 'stretch',
+            gap: '0.65rem',
+            animation: 'fadeInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           {navLinks.map((link) => {
@@ -233,50 +258,71 @@ export const Navbar = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  color: isActive ? 'var(--accent-lime)' : '#ffffff',
-                  letterSpacing: '0.08em',
+                  fontSize: '0.98rem',
+                  fontWeight: isActive ? 700 : 500,
+                  color: isActive ? '#ffffff' : '#cbd5e1',
+                  letterSpacing: '0.12em',
                   textDecoration: 'none',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
+                  justifyContent: 'space-between',
+                  padding: '0.75rem 1.25rem',
+                  borderRadius: '14px',
+                  backgroundColor: isActive ? 'rgba(200, 255, 0, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+                  border: isActive
+                    ? '1px solid rgba(200, 255, 0, 0.45)'
+                    : '1px solid rgba(255, 255, 255, 0.06)',
+                  boxShadow: isActive ? '0 0 20px rgba(200, 255, 0, 0.15)' : 'none',
+                  transition: 'all 0.25s ease',
+                  minHeight: '48px',
                 }}
               >
-                {isActive && (
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--accent-lime)',
-                    }}
-                  />
-                )}
-                {link.label}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {isActive && (
+                    <span
+                      style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--accent-lime)',
+                        boxShadow: '0 0 8px var(--accent-lime)',
+                      }}
+                    />
+                  )}
+                  {link.label}
+                </div>
+                <ArrowUpRight size={14} style={{ opacity: isActive ? 1 : 0.4 }} color={isActive ? 'var(--accent-lime)' : 'currentColor'} />
               </Link>
             );
           })}
-          <Link
-            to="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '0.75rem 2rem',
-              borderRadius: '9999px',
-              backgroundColor: 'var(--accent-lime)',
-              color: '#000000',
-              fontFamily: 'var(--font-mono)',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              textDecoration: 'none',
-              marginTop: '0.5rem',
-            }}
-          >
-            LET'S TALK <ArrowUpRight size={16} />
-          </Link>
+
+          <div style={{ paddingTop: '0.5rem' }}>
+            <Link
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="glass-reflection"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '0.85rem 1.5rem',
+                borderRadius: '9999px',
+                backgroundColor: 'var(--accent-lime)',
+                color: '#000000',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                letterSpacing: '0.08em',
+                textDecoration: 'none',
+                minHeight: '48px',
+                boxShadow: '0 0 25px rgba(200, 255, 0, 0.35)',
+                border: '1px solid rgba(200, 255, 0, 0.8)',
+              }}
+            >
+              CONNECT <ArrowUpRight size={16} />
+            </Link>
+          </div>
         </div>
       )}
     </>

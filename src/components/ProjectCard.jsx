@@ -31,30 +31,43 @@ export const ProjectCard = ({ project, index }) => {
       ref={cardRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="glass-panel"
+      className="project-glass-card"
       style={{
         padding: 'clamp(1.75rem, 4vw, 3.25rem)',
-        borderRadius: '28px',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        background: 'linear-gradient(180deg, rgba(14, 17, 23, 0.75) 0%, rgba(8, 10, 14, 0.9) 100%)',
         position: 'relative',
-        overflow: 'hidden',
-        transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
       }}
     >
       <div
-        className="project-showcase-grid"
+        className={`project-showcase-grid ${isReversed ? 'reversed' : ''}`}
         style={{
           display: 'grid',
           gridTemplateColumns: isReversed ? '1fr 1.2fr' : '1.2fr 1fr',
-          gap: 'clamp(2.5rem, 4.5vw, 4rem)',
+          gap: 'clamp(2rem, 4vw, 3.5rem)',
           alignItems: 'center',
+          position: 'relative',
+          zIndex: 3,
         }}
       >
         {/* Left or Right Content depending on alternation */}
-        <div style={{ order: isReversed ? 2 : 1 }}>
-          {/* Category Badge & Award */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px', marginBottom: '1.25rem' }}>
+        <div
+          className="project-card-content"
+          style={{
+            order: isReversed ? 2 : 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          {/* 1. Category Badge & Award */}
+          <div
+            className="project-card-header"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              gap: '10px',
+              marginBottom: '1.25rem',
+            }}
+          >
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
@@ -65,7 +78,7 @@ export const ProjectCard = ({ project, index }) => {
                 textTransform: 'uppercase',
               }}
             >
-              {project.number} // {project.category}
+              {project.number} / 35 // {project.category}
             </span>
 
             {project.award && (
@@ -77,11 +90,14 @@ export const ProjectCard = ({ project, index }) => {
                   padding: '0.3rem 0.85rem',
                   borderRadius: '9999px',
                   backgroundColor: 'rgba(56, 189, 248, 0.12)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
                   border: '1px solid rgba(56, 189, 248, 0.35)',
                   color: '#38bdf8',
                   fontSize: '0.72rem',
                   fontFamily: 'var(--font-mono)',
                   fontWeight: 600,
+                  boxShadow: '0 4px 12px rgba(56, 189, 248, 0.15)',
                 }}
               >
                 <Sparkles size={12} />
@@ -90,127 +106,111 @@ export const ProjectCard = ({ project, index }) => {
             )}
           </div>
 
-          {/* Project Title */}
-          <h3
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)',
-              fontWeight: 800,
-              letterSpacing: '-0.025em',
-              lineHeight: 1.05,
-              color: '#ffffff',
-              marginBottom: '0.5rem',
-            }}
-          >
-            {project.title}
-          </h3>
+          {/* 2. Project Title & Tagline */}
+          <div className="project-card-title-group">
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.85rem, 4vw, 3.4rem)',
+                fontWeight: 800,
+                letterSpacing: '-0.025em',
+                lineHeight: 1.08,
+                color: '#ffffff',
+                marginBottom: '0.5rem',
+                textShadow: '0 2px 18px rgba(0, 0, 0, 0.45)',
+              }}
+            >
+              {project.title}
+            </h3>
 
-          <p
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.95rem',
-              color: 'var(--accent-lime)',
-              fontWeight: 500,
-              marginBottom: '1.25rem',
-            }}
-          >
-            {project.tagline}
-          </p>
+            <p
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'clamp(0.85rem, 1.2vw, 0.95rem)',
+                color: 'var(--accent-lime)',
+                fontWeight: 500,
+                marginBottom: '1.25rem',
+                textShadow: '0 2px 12px rgba(200, 255, 0, 0.15)',
+              }}
+            >
+              {project.tagline}
+            </p>
+          </div>
 
+          {/* 4. Description */}
           <p
+            className="project-card-desc"
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '1rem',
+              fontSize: 'clamp(0.92rem, 1.1vw, 1rem)',
               lineHeight: 1.75,
               color: 'var(--text-muted)',
-              marginBottom: '2rem',
+              marginBottom: '1.75rem',
             }}
           >
             {project.description}
           </p>
 
-          {/* Technology Metadata Pills */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '2.5rem' }}>
+          {/* 5. Technology Metadata Pills */}
+          <div
+            className="project-card-tech"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '8px',
+              marginBottom: '2rem',
+            }}
+          >
             {project.technologies.map((tech) => (
-              <span
-                key={tech}
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  padding: '0.35rem 0.85rem',
-                  borderRadius: '6px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  color: '#e2e8f0',
-                  letterSpacing: '0.04em',
-                }}
-              >
+              <span key={tech} className="project-tech-pill">
                 {tech}
               </span>
             ))}
           </div>
 
-          {/* Verified Action CTAs */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-            {project.liveDemo && (
-              <MagneticButton
-                href={project.liveDemo}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '0.75rem 1.6rem',
-                  borderRadius: '9999px',
-                  backgroundColor: 'var(--accent-lime)',
-                  color: '#000000',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.82rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.05em',
-                  boxShadow: '0 0 20px rgba(200, 255, 0, 0.25)',
-                }}
-              >
-                LIVE ARCHITECTURE
-                <ArrowUpRight size={16} />
-              </MagneticButton>
-            )}
-
+          {/* 6. Verified Action CTAs */}
+          <div
+            className="project-card-actions"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '1rem',
+            }}
+          >
             {project.github && (
               <MagneticButton
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass-pill"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '0.75rem 1.4rem',
-                  fontSize: '0.82rem',
-                  fontFamily: 'var(--font-mono)',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                }}
+                className="project-source-btn"
               >
                 <GithubIcon size={16} />
-                SOURCE CODE
+                VIEW SOURCE
+                <ArrowUpRight size={14} style={{ opacity: 0.8 }} />
+              </MagneticButton>
+            )}
+
+            {project.liveDemo && (
+              <MagneticButton
+                href={project.liveDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-demo-btn"
+              >
+                LIVE DEMO
+                <ArrowUpRight size={16} />
               </MagneticButton>
             )}
           </div>
         </div>
 
-        {/* Visual Preview Canvas */}
+        {/* Visual Preview Canvas - Layered Glass Frame */}
         <div
+          className="project-image-glass-frame project-card-visual"
           style={{
             order: isReversed ? 1 : 2,
-            position: 'relative',
-            borderRadius: '20px',
-            overflow: 'hidden',
             aspectRatio: '16/11',
-            background: 'radial-gradient(circle at 50% 50%, rgba(20, 25, 35, 0.9) 0%, rgba(8, 10, 14, 0.95) 100%)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            width: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -226,6 +226,7 @@ export const ProjectCard = ({ project, index }) => {
               height: '100%',
               objectFit: 'cover',
               transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+              display: 'block',
             }}
           />
 
@@ -247,13 +248,16 @@ export const ProjectCard = ({ project, index }) => {
               right: '1.25rem',
               padding: '0.35rem 0.85rem',
               borderRadius: '9999px',
-              backgroundColor: 'rgba(6, 7, 9, 0.85)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              backgroundColor: 'rgba(6, 7, 9, 0.65)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.16)',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.72rem',
               color: 'var(--accent-lime)',
               fontWeight: 600,
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
+              zIndex: 4,
             }}
           >
             SYS-ACTIVE

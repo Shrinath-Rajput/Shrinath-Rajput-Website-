@@ -486,29 +486,24 @@ export const About = () => {
 
           {/* Monumental Editorial Heading */}
           <h2
+            className="about-hero-title"
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3.2rem, 6.6vw, 7.8rem)',
+              fontSize: 'clamp(2rem, 3.4vw, 4.2rem)',
               fontWeight: 800,
-              lineHeight: 0.9,
-              letterSpacing: '-0.03em',
+              lineHeight: 1.06,
+              letterSpacing: '-0.025em',
               textTransform: 'uppercase',
               margin: '0 0 1.5rem',
-              maxWidth: '1500px',
+              maxWidth: '100%',
               background: 'linear-gradient(180deg, #ffffff 15%, #cbd5e1 60%, #94a3b8 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}
           >
-            BUILDING
-            <br />
-            INTELLIGENT,
-            <br />
-            PRACTICAL &
-            <br />
-            SCALABLE
-            <br />
-            SYSTEMS
+            BUILDING INTELLIGENT, PRACTICAL &
+            <br className="about-title-br" />
+            <span style={{ display: 'inline-block' }}>SCALABLE SYSTEMS</span>
           </h2>
 
           {/* Supporting Line */}
@@ -533,16 +528,16 @@ export const About = () => {
           className="about-portrait-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(0, 0.45fr) minmax(0, 0.55fr)',
-            gap: 'clamp(2rem, 3.5vw, 4.5rem)',
-            alignItems: 'start',
+            gridTemplateColumns: 'minmax(0, 0.95fr) minmax(0, 1.05fr)',
+            gap: 'clamp(1.75rem, 2.5vw, 3rem)',
+            alignItems: 'stretch',
             marginBottom: 'clamp(4.5rem, 9vh, 6.5rem)',
           }}
         >
           {/* LEFT SIDE: Large Portrait Card */}
           <div
             ref={portraitCardRef}
-            className="real-glass-card glass-reflection"
+            className="real-glass-card glass-reflection about-portrait-card"
             style={{
               position: 'relative',
               borderRadius: '28px',
@@ -551,7 +546,7 @@ export const About = () => {
               flexDirection: 'column',
               justifyContent: 'space-between',
               boxSizing: 'border-box',
-              minHeight: 'clamp(520px, 64vh, 720px)',
+              height: '100%',
             }}
           >
             {/* Inner Image Stage */}
@@ -561,8 +556,9 @@ export const About = () => {
                 borderRadius: '20px',
                 overflow: 'hidden',
                 flex: 1,
-                minHeight: '380px',
+                minHeight: '320px',
                 background: '#040507',
+                display: 'flex',
               }}
             >
               <img
@@ -575,7 +571,7 @@ export const About = () => {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  objectPosition: 'center 15%',
+                  objectPosition: 'center 8%',
                   filter: 'contrast(1.04) brightness(0.97)',
                   display: 'block',
                 }}
@@ -587,7 +583,7 @@ export const About = () => {
                   position: 'absolute',
                   inset: 0,
                   background:
-                    'linear-gradient(to top, rgba(6, 7, 10, 0.90) 0%, rgba(6, 7, 10, 0.3) 22%, transparent 45%)',
+                    'linear-gradient(to top, rgba(6, 7, 10, 0.88) 0%, rgba(6, 7, 10, 0.20) 20%, transparent 40%)',
                   pointerEvents: 'none',
                 }}
               />
@@ -631,14 +627,14 @@ export const About = () => {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  padding: '1.25rem 1.4rem',
+                  padding: '1.1rem 1.35rem',
                   zIndex: 3,
                 }}
               >
                 <div
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(1.4rem, 2.2vw, 1.85rem)',
+                    fontSize: 'clamp(1.3rem, 2vw, 1.75rem)',
                     fontWeight: 800,
                     color: '#ffffff',
                     letterSpacing: '-0.01em',
@@ -650,7 +646,7 @@ export const About = () => {
                 <div
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.78rem',
+                    fontSize: '0.75rem',
                     color: 'var(--accent-lime)',
                     letterSpacing: '0.12em',
                     marginTop: '4px',
@@ -670,7 +666,7 @@ export const About = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 gap: '0.75rem',
-                paddingTop: '1rem',
+                paddingTop: '0.9rem',
                 marginTop: '0.5rem',
                 borderTop: '1px solid rgba(255, 255, 255, 0.08)',
                 fontFamily: 'var(--font-mono)',
@@ -700,20 +696,25 @@ export const About = () => {
           {/* RIGHT SIDE: Complete Professional Profile & Intro from Old About Page */}
           <div
             ref={introTextRef}
+            className="about-intro-col"
             style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem',
+              gap: '1.25rem',
+              height: '100%',
+              justifyContent: 'space-between',
             }}
           >
             {/* Introduction Card */}
             <div
               className="real-glass-card glass-reflection"
               style={{
-                padding: 'clamp(1.5rem, 2.5vw, 2.4rem)',
+                flex: 1,
+                padding: 'clamp(1.5rem, 2.2vw, 2.25rem)',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1.25rem',
+                justifyContent: 'space-between',
+                gap: '1.15rem',
               }}
             >
               {/* Top Technical Metadata Bar */}
@@ -725,7 +726,7 @@ export const About = () => {
                   gap: '12px',
                   flexWrap: 'wrap',
                   borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                  paddingBottom: '0.9rem',
+                  paddingBottom: '0.85rem',
                 }}
               >
                 <div
@@ -797,55 +798,64 @@ export const About = () => {
                 </div>
               </div>
 
-              {/* Exact paragraph 1 from old About HTML */}
-              <p
+              {/* Bio Paragraphs */}
+              <div
                 style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)',
-                  lineHeight: 1.65,
-                  color: '#ffffff',
-                  fontWeight: 500,
-                  margin: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.95rem',
                 }}
               >
-                Hi, I'm <strong style={{ color: 'var(--accent-lime)' }}>Shrinath Rajput</strong> — an aspiring Artificial Intelligence Engineer and Machine Learning enthusiast who loves turning ideas into intelligent systems.
-              </p>
+                {/* Exact paragraph 1 from old About HTML */}
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'clamp(1.05rem, 1.45vw, 1.25rem)',
+                    lineHeight: 1.6,
+                    color: '#ffffff',
+                    fontWeight: 500,
+                    margin: 0,
+                  }}
+                >
+                  Hi, I'm <strong style={{ color: 'var(--accent-lime)' }}>Shrinath Rajput</strong> — an aspiring Artificial Intelligence Engineer and Machine Learning enthusiast who loves turning ideas into intelligent systems.
+                </p>
 
-              {/* Exact paragraph 2 from old About HTML */}
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'clamp(0.95rem, 1.15vw, 1.05rem)',
-                  lineHeight: 1.75,
-                  color: '#cbd5e1',
-                  margin: 0,
-                }}
-              >
-                I'm deeply fascinated by how data and algorithms can shape the future of healthcare, automation, and creativity in technology.
-              </p>
+                {/* Exact paragraph 2 from old About HTML */}
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'clamp(0.92rem, 1.1vw, 1rem)',
+                    lineHeight: 1.7,
+                    color: '#cbd5e1',
+                    margin: 0,
+                  }}
+                >
+                  I'm deeply fascinated by how data and algorithms can shape the future of healthcare, automation, and creativity in technology.
+                </p>
 
-              {/* Exact paragraph 3 from old About HTML */}
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'clamp(0.95rem, 1.15vw, 1.05rem)',
-                  lineHeight: 1.75,
-                  color: '#cbd5e1',
-                  margin: 0,
-                }}
-              >
-                Beyond code, I enjoy exploring design, experimenting with motion and interaction, and finding ways to blend artistic creativity with technical precision. My goal is to build solutions that not only perform — but also inspire.
-              </p>
+                {/* Exact paragraph 3 from old About HTML */}
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 'clamp(0.92rem, 1.1vw, 1rem)',
+                    lineHeight: 1.7,
+                    color: '#cbd5e1',
+                    margin: 0,
+                  }}
+                >
+                  Beyond code, I enjoy exploring design, experimenting with motion and interaction, and finding ways to blend artistic creativity with technical precision. My goal is to build solutions that not only perform — but also inspire.
+                </p>
+              </div>
 
               {/* Exact paragraph 4 & 5 from old About HTML */}
               <p
                 style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: 'clamp(0.92rem, 1.15vw, 1.02rem)',
-                  lineHeight: 1.75,
+                  fontSize: 'clamp(0.90rem, 1.05vw, 0.98rem)',
+                  lineHeight: 1.7,
                   color: 'var(--text-muted)',
                   margin: 0,
-                  paddingTop: '0.5rem',
+                  paddingTop: '0.65rem',
                   borderTop: '1px solid rgba(255, 255, 255, 0.08)',
                 }}
               >
@@ -857,7 +867,7 @@ export const About = () => {
             <div
               className="real-glass-card"
               style={{
-                padding: '1.25rem 1.5rem',
+                padding: '1.15rem 1.5rem',
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                 gap: '1rem',

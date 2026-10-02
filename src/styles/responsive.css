@@ -1,6 +1,42 @@
-/* Responsive Rules & Mobile Fluid Typography */
+/* ========================================================
+   GLOBAL RESPONSIVE SYSTEM & FLUID CINEMATIC ARCHITECTURE
+   Desktop / Laptop / Tablet / Mobile / Small Mobile (<390px)
+   ======================================================== */
 
-/* Desktop Hero Grid: Balanced 1.08fr / 0.92fr across 94vw full width */
+/* ========================================================
+   GLOBAL FULL-WIDTH LAYOUT SYSTEM: WIDE CINEMATIC VIEWPORT
+   Occupies ~90–94vw on desktop/laptop, eliminating excessive side margins
+   ======================================================== */
+.site-container,
+.page-container,
+.services-container,
+.about-container,
+.contact-container {
+  width: min(94vw, 1820px) !important;
+  max-width: 1820px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(24px, 3.5vw, 64px) !important;
+  padding-right: clamp(24px, 3.5vw, 64px) !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure no child can exceed viewport width */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent accidental horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ========================================================
+   HERO SECTION RESPONSIVE
+   ======================================================== */
+
 .hero-main-grid {
   display: grid !important;
   grid-template-columns: minmax(0, 1.08fr) minmax(480px, 0.92fr) !important;
@@ -17,7 +53,6 @@
   width: 100% !important;
 }
 
-/* Hero Information Grid: 6-Panel Compact Glass Interface across 94vw */
 .hero-info-grid {
   display: grid !important;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr) minmax(0, 0.95fr) minmax(0, 0.95fr) minmax(0, 1.15fr) minmax(0, 1.55fr) !important;
@@ -26,7 +61,10 @@
   margin: 1.25rem auto 0.85rem !important;
 }
 
-/* About Full-Width Container & Grids across 90-94vw */
+/* ========================================================
+   ABOUT SECTION RESPONSIVE
+   ======================================================== */
+
 .about-container {
   width: min(94vw, 1820px) !important;
   margin-left: auto !important;
@@ -35,9 +73,23 @@
 
 .about-portrait-grid {
   display: grid !important;
-  grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr) !important;
-  gap: clamp(2rem, 3.5vw, 4.5rem) !important;
-  align-items: start !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) !important;
+  gap: clamp(1.75rem, 2.5vw, 3rem) !important;
+  align-items: stretch !important;
+}
+
+.about-portrait-card {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.about-intro-col {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
 }
 
 .about-focus-grid {
@@ -64,6 +116,45 @@
   gap: clamp(1rem, 1.8vw, 1.8rem) !important;
 }
 
+/* Certificates Responsive Grid: Desktop (3 large responsive columns across 94vw) */
+.cert-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 2vw, 2rem) !important;
+  width: 100% !important;
+}
+
+/* AI Frontier Lab: 3 Large Responsive Cards across 94vw */
+.ailab-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 2vw, 1.85rem) !important;
+  width: 100% !important;
+  margin-bottom: clamp(3.5rem, 7vh, 5.5rem) !important;
+}
+
+/* Technical Matrix / Stack: 3 Large Responsive Columns across 94vw */
+.skills-matrix-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 2vw, 1.85rem) !important;
+  width: 100% !important;
+}
+
+/* ========================================================
+   WORK PAGE FILTERS & PROJECTS RESPONSIVE
+   ======================================================== */
+
+.project-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ========================================================
+   BREAKPOINTS: LAPTOP & LARGE TABLETS (<= 1365px)
+   ======================================================== */
+
 @media (max-width: 1365px) {
   .hero-info-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -71,12 +162,28 @@
   }
 }
 
+@media (max-width: 1180px) {
+  .cert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .ailab-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .skills-matrix-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
 @media (max-width: 1200px) {
   .hero-main-grid {
-    grid-template-columns: minmax(0, 1.05fr) minmax(440px, 0.95fr) !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr) !important;
     gap: 1.75rem !important;
   }
 }
+
+/* ========================================================
+   BREAKPOINTS: TABLET PORTRAIT & LANDSCAPE (<= 1024px)
+   ======================================================== */
 
 @media (max-width: 1024px) {
   .hero-info-grid {
@@ -90,19 +197,49 @@
   }
 
   .hero-display-title {
-    font-size: clamp(2.8rem, 7.5vw, 4.4rem) !important;
+    font-size: clamp(2.6rem, 7vw, 4.2rem) !important;
     white-space: nowrap !important;
     overflow: visible !important;
   }
-  
-  .about-portrait-grid,
-  .project-showcase-grid {
+
+  /* About Section 1-Column Adaptation */
+  .about-portrait-grid {
     grid-template-columns: 1fr !important;
-    gap: 2.5rem !important;
+    gap: 2rem !important;
+    align-items: start !important;
+  }
+
+  .about-hero-title {
+    font-size: clamp(1.9rem, 3.8vw, 3rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .about-portrait-card {
+    height: auto !important;
+    min-height: unset !important;
+    width: 100% !important;
+    max-width: 640px !important;
+    margin: 0 auto !important;
+  }
+
+  .about-portrait-card > div:first-child {
+    min-height: unset !important;
+    aspect-ratio: 4 / 4.6 !important;
+    max-height: 520px !important;
+    width: 100% !important;
+  }
+
+  .about-portrait-card img {
+    object-position: center 10% !important;
+    object-fit: cover !important;
+  }
+
+  .about-intro-col {
+    height: auto !important;
   }
 
   .about-education-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 1.25rem !important;
   }
 
@@ -117,133 +254,383 @@
   }
 
   .about-methods-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 1.25rem !important;
   }
 
-  .what-we-do-row {
-    grid-template-columns: 60px 1fr 1fr 40px !important;
+  /* Work Project Cards Single-Column Sequence */
+  .project-showcase-grid {
+    display: flex !important;
+    flex-direction: column !important;
     gap: 1.5rem !important;
   }
-  
-  .hero-video-col {
-    height: clamp(340px, 58vh, 500px) !important;
+
+  .project-card-content {
+    display: contents !important;
+  }
+
+  .project-card-header {
+    order: 1 !important;
+    margin-bottom: 0.65rem !important;
+  }
+
+  .project-card-title-group {
+    order: 2 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .project-card-visual {
+    order: 3 !important;
     width: 100% !important;
-    max-width: 100% !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .project-card-desc {
+    order: 4 !important;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .project-card-tech {
+    order: 5 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .project-card-actions {
+    order: 6 !important;
+  }
+
+  /* Services Rows */
+  .what-we-do-row {
+    grid-template-columns: 50px 1.2fr 1.6fr 40px !important;
+    gap: 1.5rem !important;
+  }
+
+  .service-panel-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+
+  .services-container {
+    padding-left: clamp(18px, 3vw, 28px) !important;
+    padding-right: clamp(18px, 3vw, 28px) !important;
+  }
+
+  .cert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.4rem !important;
+  }
+
+  .hero-video-col {
+    height: clamp(340px, 54vh, 480px) !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    margin: 0 auto;
   }
 }
 
+/* ========================================================
+   BREAKPOINTS: MOBILE & PHONES (<= 768px)
+   ======================================================== */
+
 @media (max-width: 768px) {
-  .hero-main-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2.25rem !important;
-    text-align: left;
-    padding: 0 1.25rem !important;
+  /* Global Content Padding: 18px-24px, never touching edges */
+  .site-container,
+  .page-container,
+  .services-container,
+  .about-container,
+  .contact-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: clamp(18px, 4vw, 24px) !important;
+    padding-right: clamp(18px, 4vw, 24px) !important;
   }
 
-  .hero-info-grid {
-    grid-template-columns: 1fr !important;
-    width: calc(100% - 32px) !important;
-    gap: 0.85rem !important;
-    margin: 1.25rem auto 0.75rem !important;
+  .section-padding {
+    padding-top: clamp(4rem, 8vh, 5.5rem) !important;
+    padding-bottom: clamp(4rem, 8vh, 5.5rem) !important;
   }
 
-  .about-container {
-    width: calc(100% - 32px) !important;
-    padding: 0 !important;
-  }
-
-  .about-focus-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-
-  .about-courses-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-
+  /* Compact Mobile Glass Navbar */
   .glass-navbar {
     width: calc(100% - 32px) !important;
+    max-width: 100% !important;
     padding: 0 1.25rem !important;
-    height: 68px !important;
+    height: 64px !important;
+    top: 14px !important;
   }
 
-  .hero-display-title {
-    font-size: clamp(2.8rem, 13vw, 4.6rem) !important;
-    letter-spacing: -0.03em !important;
-  }
-  
   .nav-desktop-links {
     display: none !important;
   }
-  
+
   .nav-mobile-toggle {
     display: flex !important;
   }
-  
-  .section-padding {
-    padding-top: 4.5rem !important;
-    padding-bottom: 4.5rem !important;
-  }
-  
+
   .hide-on-mobile {
     display: none !important;
   }
 
+  /* Hero Mobile Composition */
+  .hero-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    text-align: left;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .hero-info-grid {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    gap: 0.85rem !important;
+    margin: 1.25rem 0 0.75rem !important;
+  }
+
+  .hero-display-title {
+    font-size: clamp(2.3rem, 11.5vw, 3.8rem) !important;
+    letter-spacing: -0.03em !important;
+    line-height: 0.9 !important;
+  }
+
+  .hero-video-col {
+    height: clamp(280px, 40vh, 420px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 2 !important;
+    margin: 0 auto;
+  }
+
+  /* About Mobile Stack */
+  .about-container {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .about-title-br {
+    display: none !important;
+  }
+
+  .about-hero-title {
+    font-size: clamp(1.6rem, 5.4vw, 2.25rem) !important;
+    line-height: 1.15 !important;
+    word-break: normal !important;
+  }
+
+  .about-education-grid,
+  .about-courses-grid,
+  .about-focus-grid,
+  .about-methods-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Services Mobile Stack */
   .what-we-do-row {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    padding: 1.75rem 1.25rem !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    border-radius: 20px !important;
+    margin-bottom: 1.25rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+  }
+
+  .service-glass-panel {
+    padding: 1.6rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .service-panel-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .services-container {
+    padding-left: clamp(16px, 4vw, 20px) !important;
+    padding-right: clamp(16px, 4vw, 20px) !important;
+  }
+
+  .cert-grid,
+  .ailab-cards-grid,
+  .skills-matrix-grid {
     grid-template-columns: 1fr !important;
     gap: 1.25rem !important;
   }
 
-  .project-showcase-grid {
-    grid-template-columns: 1fr !important;
+  .resume-action-buttons {
+    width: 100% !important;
+    flex-direction: column !important;
   }
 
-  .hero-video-col {
-    height: clamp(300px, 44vh, 460px) !important;
+  .resume-action-buttons a {
     width: 100% !important;
-    max-width: 520px !important;
-    order: 2 !important;
-    margin: 0 auto;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Work Filter: Accessible Horizontal Scroll with Hidden Scrollbar */
+  .project-filter-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 2rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    scrollbar-width: none !important;
+  }
+
+  .project-filter-row::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .project-filter-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 0.55rem 1.05rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  /* Project Cards Mobile Padding & Radius */
+  .project-glass-card {
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 22px !important;
+  }
+
+  .project-image-glass-frame {
+    border-radius: 16px !important;
+  }
+
+  /* Stack Matrix on Mobile */
+  #skills .glass-panel {
+    padding: 1.35rem 1.15rem !important;
+  }
+
+  /* AI Frontier Lab on Mobile */
+  #ai-showcase .glass-panel {
+    padding: 1.5rem 1.25rem !important;
+  }
+
+  /* Contact on Mobile */
+  .contact-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+
+  .contact-glass-panel {
+    padding: 1.6rem 1.2rem !important;
+    border-radius: 22px !important;
+  }
+
+  #contact h2 {
+    font-size: clamp(2.2rem, 8.5vw, 4rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  /* Footer on Mobile */
+  footer .site-container > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
   }
 }
 
+/* ========================================================
+   BREAKPOINTS: SMALL MOBILE PHONES (<= 480px & <= 390px)
+   ======================================================== */
+
 @media (max-width: 480px) {
   .hero-display-title {
-    font-size: clamp(2.4rem, 14vw, 3.5rem) !important;
+    font-size: clamp(2rem, 12vw, 3.2rem) !important;
   }
-  
+
+  .about-hero-title {
+    font-size: clamp(1.4rem, 6.2vw, 1.85rem) !important;
+  }
+
   .hero-meta-strip {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 1rem !important;
+    gap: 0.85rem !important;
   }
 
   .hero-video-col {
-    height: clamp(260px, 38vh, 360px) !important;
+    height: clamp(250px, 36vh, 340px) !important;
+  }
+
+  .project-card-actions {
+    flex-direction: column !important;
     width: 100% !important;
-    max-width: 100% !important;
-    order: 2 !important;
-    margin: 0 auto;
+  }
+
+  .project-card-actions a,
+  .project-card-actions button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .service-glass-panel {
+    padding: 1.25rem 1rem !important;
+    border-radius: 16px !important;
+  }
+
+  .contact-method-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 }
 
 @media (max-width: 390px) {
-  .hero-display-title {
-    font-size: clamp(2rem, 15vw, 2.9rem) !important;
-  }
-  
-  .site-container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  .site-container,
+  .page-container,
+  .services-container,
+  .about-container,
+  .contact-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
-  .hero-video-col {
-    height: clamp(240px, 35vh, 330px) !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    order: 2 !important;
-    margin: 0 auto;
+  .glass-navbar {
+    width: calc(100% - 24px) !important;
+    padding: 0 1rem !important;
+  }
+
+  .hero-display-title {
+    font-size: clamp(1.85rem, 13vw, 2.75rem) !important;
+  }
+
+  .project-glass-card {
+    padding: 1.25rem 1rem !important;
+  }
+}
+
+/* ========================================================
+   ANIMATIONS & ACCESSIBILITY
+   ======================================================== */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

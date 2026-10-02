@@ -1,151 +1,349 @@
 import React from 'react';
 import { SectionHeading } from '../components/SectionHeading';
-import { skillsCategories } from '../data/skills';
-import { Brain, Cpu, Bot, Eye, Server, Code2, Database, Terminal } from 'lucide-react';
+import { techStackItems, skillCategories } from '../data/skills';
+import {
+  Code2,
+  Layers,
+  Layout,
+  Server,
+  Terminal,
+  Database,
+  BarChart3,
+  Brain,
+  Bot,
+  Cpu,
+  Sparkles,
+  CheckCircle2,
+} from 'lucide-react';
 
 export const Skills = () => {
-  const categoryIcons = [Brain, Cpu, Bot, Eye, Server, Code2, Database, Terminal];
+  // 11 Category Icons mapping strictly to the 11 Skill Categories from the source HTML
+  const categoryIconMap = {
+    'Languages': Code2,
+    'Libraries / Frameworks': Layers,
+    'Frontend': Layout,
+    'Backend': Server,
+    'Tools': Terminal,
+    'Databases': Database,
+    'Statistical & Data Skills': BarChart3,
+    'Machine Learning Algorithms': Brain,
+    'NLP': Bot,
+    'Deep Learning': Cpu,
+    'Other Skills': Sparkles,
+  };
 
   return (
-    <section id="skills" className="section-padding" style={{ position: 'relative', backgroundColor: '#060709' }}>
-      <div className="site-container">
+    <section
+      id="skills"
+      className="section-padding"
+      style={{
+        position: 'relative',
+        backgroundColor: '#06080c',
+        backgroundImage: `
+          radial-gradient(circle at 85% 15%, rgba(200, 255, 0, 0.04) 0%, transparent 55%),
+          radial-gradient(circle at 10% 45%, rgba(56, 189, 248, 0.035) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+          linear-gradient(180deg, #05070a 0%, #080b11 50%, #05070a 100%)
+        `,
+        overflow: 'hidden',
+      }}
+    >
+      {/* Background Subtle Depth Grid */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px)',
+          backgroundSize: '36px 36px',
+          opacity: 0.35,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Ambient Lighting Orbs */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '8%',
+          right: '5%',
+          width: '550px',
+          height: '550px',
+          background: 'radial-gradient(circle, rgba(200, 255, 0, 0.045) 0%, transparent 65%)',
+          filter: 'blur(90px)',
+          pointerEvents: 'none',
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: '55%',
+          left: '2%',
+          width: '600px',
+          height: '600px',
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.04) 0%, transparent 65%)',
+          filter: 'blur(100px)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div className="site-container" style={{ position: 'relative', zIndex: 2 }}>
+        {/* Section Header */}
         <SectionHeading
           number="03"
           subtitle="CORE CAPABILITIES"
           title="TECHNICAL MATRIX & DEEP-TECH STACK"
         />
 
-        <div
+        <p
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.75rem',
+            fontFamily: 'var(--font-body)',
+            fontSize: 'clamp(1rem, 1.4vw, 1.15rem)',
+            color: 'var(--text-muted)',
+            maxWidth: '1000px',
+            lineHeight: 1.7,
+            marginTop: '-1.5rem',
+            marginBottom: 'clamp(2.5rem, 5vh, 4rem)',
           }}
         >
-          {skillsCategories.map((cat, idx) => {
-            const Icon = categoryIcons[idx] || Cpu;
-            return (
-              <div
-                key={cat.category}
-                className="glass-panel"
+          Comprehensive technical foundation spanning machine learning algorithms, deep neural architectures,
+          statistical data science, real-time computer vision, and scalable production engineering.
+        </p>
+
+        {/* ========================================================
+            PART A: TECH STACK VISUAL GRID (ALL 24 ITEMS FROM SOURCE HTML)
+            ======================================================== */}
+        <div style={{ marginBottom: 'clamp(3.5rem, 7vh, 5.5rem)' }}>
+          {/* Subheading Badge */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              marginBottom: '1.75rem',
+              paddingBottom: '1rem',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span
                 style={{
-                  padding: 'clamp(1.5rem, 2.5vw, 2.25rem)',
-                  borderRadius: '22px',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  background: 'linear-gradient(180deg, rgba(14, 18, 24, 0.7) 0%, rgba(8, 10, 14, 0.9) 100%)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  transition: 'all 0.35s ease',
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--accent-lime)',
+                  boxShadow: '0 0 10px var(--accent-lime)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.borderColor = 'rgba(200, 255, 0, 0.35)';
-                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(0,0,0,0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0px)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                  e.currentTarget.style.boxShadow = 'none';
+              />
+              <h3
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  color: '#ffffff',
+                  textTransform: 'uppercase',
+                  margin: 0,
                 }}
               >
-                <div>
-                  {/* Category Header */}
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginBottom: '1.25rem',
+                TECH STACK // 24 CORE TECHNOLOGIES
+              </h3>
+            </div>
+
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.74rem',
+                color: 'var(--accent-lime)',
+                letterSpacing: '0.1em',
+              }}
+            >
+              SOURCE-VERIFIED ARSENAL
+            </span>
+          </div>
+
+          {/* 24 Tech Stack Icon Cards Grid */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(115px, 8.5vw, 145px), 1fr))',
+              gap: 'clamp(0.85rem, 1.5vw, 1.25rem)',
+            }}
+          >
+            {techStackItems.map((item) => (
+              <div
+                key={item.name}
+                className="tech-icon-glass-card"
+                title={item.name}
+              >
+                <div
+                  style={{
+                    width: '52px',
+                    height: '52px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '14px',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                  }}
+                >
+                  <img
+                    src={item.icon}
+                    alt={item.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      // Fallback in case external CDN fails
+                      e.target.style.display = 'none';
                     }}
-                  >
+                  />
+                </div>
+
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    color: '#f1f5f9',
+                    marginTop: '2px',
+                  }}
+                >
+                  {item.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ========================================================
+            PART B: 11 SKILL CATEGORIES (EXACTLY AS LISTED IN SOURCE HTML)
+            ======================================================== */}
+        <div>
+          {/* Subheading Badge */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              marginBottom: '1.75rem',
+              paddingBottom: '1rem',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  backgroundColor: '#38bdf8',
+                  boxShadow: '0 0 10px #38bdf8',
+                }}
+              />
+              <h3
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  color: '#ffffff',
+                  textTransform: 'uppercase',
+                  margin: 0,
+                }}
+              >
+                SPECIALIZED DISCIPLINES // 11 DOMAIN MATRICES
+              </h3>
+            </div>
+
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.74rem',
+                color: '#38bdf8',
+                letterSpacing: '0.1em',
+              }}
+            >
+              100% INCLUSIVE CURATION
+            </span>
+          </div>
+
+          {/* 11 Category Glass Cards Grid: 3-column responsive matrix */}
+          <div className="skills-matrix-grid">
+            {skillCategories.map((cat, idx) => {
+              const Icon = categoryIconMap[cat.category] || Cpu;
+              const formattedIndex = idx < 9 ? `0${idx + 1}` : `${idx + 1}`;
+
+              return (
+                <div
+                  key={cat.category}
+                  className="matrix-glass-card"
+                  style={{
+                    padding: 'clamp(1.6rem, 2.8vw, 2.35rem)',
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div style={{ position: 'relative', zIndex: 3 }}>
+                    {/* Header: Icon & Matrix Index */}
                     <div
                       style={{
-                        width: '44px',
-                        height: '44px',
-                        borderRadius: '12px',
-                        backgroundColor: 'rgba(200, 255, 0, 0.08)',
-                        border: '1px solid rgba(200, 255, 0, 0.25)',
                         display: 'flex',
+                        justifyContent: 'space-between',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--accent-lime)',
+                        marginBottom: '1.35rem',
                       }}
                     >
-                      <Icon size={20} />
+                      <div className="matrix-icon-box">
+                        <Icon size={21} />
+                      </div>
+
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.72rem',
+                          color: 'var(--text-muted)',
+                          letterSpacing: '0.12em',
+                          fontWeight: 600,
+                        }}
+                      >
+                        {formattedIndex} // MATRIX
+                      </span>
                     </div>
 
-                    <span
+                    {/* Category Title */}
+                    <h4
                       style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.72rem',
-                        color: 'var(--text-muted)',
+                        fontFamily: 'var(--font-display)',
+                        fontSize: '1.35rem',
+                        fontWeight: 700,
+                        letterSpacing: '-0.015em',
+                        color: '#ffffff',
+                        marginBottom: '1.4rem',
+                        textShadow: '0 2px 14px rgba(0, 0, 0, 0.4)',
                       }}
                     >
-                      0{idx + 1} // MATRIX
-                    </span>
+                      {cat.category}
+                    </h4>
                   </div>
 
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '1.25rem',
-                      fontWeight: 700,
-                      color: '#ffffff',
-                      marginBottom: '0.65rem',
-                    }}
-                  >
-                    {cat.category}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-body)',
-                      fontSize: '0.88rem',
-                      lineHeight: 1.6,
-                      color: 'var(--text-muted)',
-                      marginBottom: '1.75rem',
-                    }}
-                  >
-                    {cat.description}
-                  </p>
+                  {/* Skills Pills */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', position: 'relative', zIndex: 3 }}>
+                    {cat.skills.map((skill) => (
+                      <span key={skill} className="matrix-skill-pill">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-
-                {/* Tech Pills */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {cat.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.75rem',
-                        padding: '0.35rem 0.75rem',
-                        borderRadius: '6px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        color: '#f1f5f9',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.borderColor = 'var(--accent-lime)';
-                        e.target.style.color = 'var(--accent-lime)';
-                        e.target.style.backgroundColor = 'rgba(200, 255, 0, 0.08)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                        e.target.style.color = '#f1f5f9';
-                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
