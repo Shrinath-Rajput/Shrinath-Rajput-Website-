@@ -1,0 +1,34 @@
+@import './styles/globals.css';
+@import './styles/animations.css';
+@import './styles/responsive.css';
+
+/* Root Layout Container */
+#root {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* Custom Cursor default state (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Container Utility */
+.site-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 5vw, 4rem);
+  padding-right: clamp(1.25rem, 5vw, 4rem);
+}
+
+.section-padding {
+  padding-top: clamp(6rem, 12vh, 10rem);
+  padding-bottom: clamp(6rem, 12vh, 10rem);
+}

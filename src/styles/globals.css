@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap');
+
+:root {
+  --bg-primary: #06070a;
+  --bg-secondary: #0a0c12;
+  --bg-card: rgba(14, 17, 24, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.025);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-active: rgba(200, 255, 0, 0.35);
+  
+  --text-primary: #f8fafc;
+  --text-muted: #8e95a5;
+  --text-dim: #4b5262;
+  
+  --accent-lime: #c8ff00;
+  --accent-lime-subtle: rgba(200, 255, 0, 0.12);
+  --accent-purple: #6366f1;
+  --accent-purple-glow: rgba(99, 102, 241, 0.16);
+  --accent-blue: #38bdf8;
+  --accent-blue-glow: rgba(56, 189, 248, 0.12);
+  
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  selection-background-color: var(--accent-lime);
+  selection-color: #000;
+}
+
+::selection {
+  background: var(--accent-lime);
+  color: #000000;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-lime) !important;
+  outline-offset: 4px !important;
+}
+
+/* Background noise / subtle film grain */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-lime);
+}

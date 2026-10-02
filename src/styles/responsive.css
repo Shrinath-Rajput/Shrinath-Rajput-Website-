@@ -1,0 +1,249 @@
+/* Responsive Rules & Mobile Fluid Typography */
+
+/* Desktop Hero Grid: Balanced 1.08fr / 0.92fr across 94vw full width */
+.hero-main-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(480px, 0.92fr) !important;
+  align-items: center !important;
+  gap: clamp(1.5rem, 2.5vw, 3.5rem) !important;
+  width: min(94vw, 1820px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.hero-display-title {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+/* Hero Information Grid: 6-Panel Compact Glass Interface across 94vw */
+.hero-info-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr) minmax(0, 0.95fr) minmax(0, 0.95fr) minmax(0, 1.15fr) minmax(0, 1.55fr) !important;
+  gap: clamp(0.65rem, 1vw, 1.15rem) !important;
+  width: min(94vw, 1820px) !important;
+  margin: 1.25rem auto 0.85rem !important;
+}
+
+/* About Full-Width Container & Grids across 90-94vw */
+.about-container {
+  width: min(94vw, 1820px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.about-portrait-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr) !important;
+  gap: clamp(2rem, 3.5vw, 4.5rem) !important;
+  align-items: stretch !important;
+}
+
+.about-focus-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1rem, 1.5vw, 1.5rem) !important;
+}
+
+.about-education-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1rem, 1.6vw, 1.6rem) !important;
+}
+
+.about-courses-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(0.85rem, 1.35vw, 1.35rem) !important;
+}
+
+.about-methods-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1rem, 1.8vw, 1.8rem) !important;
+}
+
+@media (max-width: 1365px) {
+  .hero-info-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.95rem !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hero-main-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(440px, 0.95fr) !important;
+    gap: 1.75rem !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.9rem !important;
+  }
+
+  .hero-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.25rem !important;
+  }
+
+  .hero-display-title {
+    font-size: clamp(2.8rem, 7.5vw, 4.4rem) !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+  
+  .about-portrait-grid,
+  .project-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  .about-education-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .about-courses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.15rem !important;
+  }
+
+  .about-focus-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
+
+  .about-methods-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .what-we-do-row {
+    grid-template-columns: 60px 1fr 1fr 40px !important;
+    gap: 1.5rem !important;
+  }
+  
+  .hero-video-col {
+    height: clamp(340px, 58vh, 500px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.25rem !important;
+    text-align: left;
+    padding: 0 1.25rem !important;
+  }
+
+  .hero-info-grid {
+    grid-template-columns: 1fr !important;
+    width: calc(100% - 32px) !important;
+    gap: 0.85rem !important;
+    margin: 1.25rem auto 0.75rem !important;
+  }
+
+  .about-container {
+    width: calc(100% - 32px) !important;
+    padding: 0 !important;
+  }
+
+  .about-focus-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .about-courses-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .glass-navbar {
+    width: calc(100% - 32px) !important;
+    padding: 0 1.25rem !important;
+    height: 68px !important;
+  }
+
+  .hero-display-title {
+    font-size: clamp(2.8rem, 13vw, 4.6rem) !important;
+    letter-spacing: -0.03em !important;
+  }
+  
+  .nav-desktop-links {
+    display: none !important;
+  }
+  
+  .nav-mobile-toggle {
+    display: flex !important;
+  }
+  
+  .section-padding {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+  
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .what-we-do-row {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .project-showcase-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-video-col {
+    height: clamp(300px, 44vh, 460px) !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    order: 2 !important;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-display-title {
+    font-size: clamp(2.4rem, 14vw, 3.5rem) !important;
+  }
+  
+  .hero-meta-strip {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+
+  .hero-video-col {
+    height: clamp(260px, 38vh, 360px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 2 !important;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-display-title {
+    font-size: clamp(2rem, 15vw, 2.9rem) !important;
+  }
+  
+  .site-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .hero-video-col {
+    height: clamp(240px, 35vh, 330px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 2 !important;
+    margin: 0 auto;
+  }
+}

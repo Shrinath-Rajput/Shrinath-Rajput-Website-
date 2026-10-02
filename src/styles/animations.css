@@ -1,0 +1,344 @@
+/* GSAP and Keyframe animation helpers */
+
+@keyframes fadeInPage {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition-wrapper {
+  animation: fadeInPage 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  width: 100%;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1.5deg);
+  }
+}
+
+@keyframes marqueeInfinite {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes soundWave {
+  0% {
+    height: 3px;
+  }
+  100% {
+    height: 14px;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeInfinite 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Animated Glass Shine Reflection */
+@keyframes glassShine {
+  0% {
+    transform: translateX(-150%) rotate(25deg);
+  }
+  20%, 100% {
+    transform: translateX(250%) rotate(25deg);
+  }
+}
+
+.glass-reflection {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-reflection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%
+  );
+  pointer-events: none;
+  animation: glassShine 12s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.035) 40%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* Authentic Glassmorphism Card with Diagonal Specular Reflection & Layered Depth */
+.real-glass-card {
+  position: relative;
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.042) 50%,
+    rgba(255, 255, 255, 0.018) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(170%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(170%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.32),
+    inset 0 0 28px rgba(255, 255, 255, 0.02) !important;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Subtle top-edge diagonal specular reflection across card top */
+.real-glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.015) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  border-radius: 22px 22px 0 0;
+  z-index: 1;
+}
+
+.real-glass-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 220%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 58%
+  );
+  pointer-events: none;
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.real-glass-card:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.025) 100%
+  ) !important;
+  border-color: rgba(200, 255, 0, 0.50) !important;
+  box-shadow:
+    0 32px 75px rgba(0, 0, 0, 0.55),
+    0 12px 30px rgba(0, 0, 0, 0.30),
+    0 0 35px rgba(200, 255, 0, 0.14),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
+    inset 0 0 30px rgba(200, 255, 0, 0.04) !important;
+  transform: translateY(-5px) !important;
+}
+
+.real-glass-card:hover::before {
+  transform: translateX(100%) rotate(25deg);
+}
+
+/* Glass Action Button with Hover Aura */
+.premium-glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.premium-glass-btn:hover {
+  background: rgba(200, 255, 0, 0.14) !important;
+  border-color: rgba(200, 255, 0, 0.65) !important;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(200, 255, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+/* Premium Layered Glass Frame around talking-head video */
+.video-frame {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.035) 40%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(25px) saturate(170%);
+  -webkit-backdrop-filter: blur(25px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 28px;
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(163, 230, 53, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.glass-pill {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.035) 50%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-color: rgba(200, 255, 0, 0.45);
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(200, 255, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+/* Metallic text effect */
+.text-metallic {
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 55%, #64748b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-lime-gradient {
+  background: linear-gradient(135deg, #c8ff00 0%, #84cc16 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mask reveal helper */
+.clip-reveal {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: clip-path 1.2s var(--ease-cinematic);
+}
+
+.clip-hidden {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+/* Accessibility: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .marquee-track {
+    animation: none !important;
+    overflow-x: auto !important;
+  }
+}
