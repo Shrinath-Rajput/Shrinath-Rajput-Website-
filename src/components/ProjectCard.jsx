@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { GithubIcon } from './SocialIcons';
 import { MagneticButton } from './MagneticButton';
+import { getAssetPath } from '../utils/assets';
 import gsap from 'gsap';
 
 export const ProjectCard = ({ project, index }) => {
@@ -217,7 +218,7 @@ export const ProjectCard = ({ project, index }) => {
         >
           <img
             ref={imageRef}
-            src={project.image}
+            src={getAssetPath(project.image)}
             alt={project.title}
             loading="lazy"
             style={{

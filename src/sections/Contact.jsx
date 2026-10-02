@@ -4,6 +4,7 @@ import { MagneticButton } from '../components/MagneticButton';
 import { Mail, FileText, ArrowUpRight, Copy, Check } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/SocialIcons';
 import { personalInfo } from '../data/experience';
+import { getAssetPath } from '../utils/assets';
 
 export const Contact = () => {
   const [copied, setCopied] = useState(false);
@@ -227,7 +228,7 @@ export const Contact = () => {
             </MagneticButton>
 
             <MagneticButton
-              href="/resume/Shrinath-Rajput-Resume.pdf"
+              href={getAssetPath('/resume/Shrinath-Rajput-Resume.pdf')}
               target="_blank"
               rel="noopener noreferrer"
               className="glass-pill"

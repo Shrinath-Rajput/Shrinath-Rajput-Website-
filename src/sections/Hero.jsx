@@ -5,6 +5,7 @@ import { MagneticButton } from '../components/MagneticButton';
 import { HeroInfoGrid } from '../components/HeroInfoGrid';
 import { marqueeTechnologies } from '../data/skills';
 import { Link } from 'react-router-dom';
+import { getAssetPath } from '../utils/assets';
 
 export const Hero = ({ isReady }) => {
   const heroRef = useRef(null);
@@ -42,8 +43,8 @@ export const Hero = ({ isReady }) => {
   const handleVideoEnded = () => {
     const nextVideo = currentVideo === 'intro' ? 'experience' : 'intro';
     const nextSrc = nextVideo === 'intro'
-      ? '/assets/videos/shrinath-intro.mp4'
-      : '/assets/videos/shrinath-experience.mp4';
+      ? getAssetPath('/assets/videos/shrinath-intro.mp4')
+      : getAssetPath('/assets/videos/shrinath-experience.mp4');
 
     setIsTransitioning(true);
     const video = videoRef.current;
@@ -210,8 +211,8 @@ export const Hero = ({ isReady }) => {
         }}
       >
         <video
-          src="/assets/videos/shrinath-hero.mp4"
-          poster="/assets/ai/shrinath-about.png"
+          src={getAssetPath('/assets/videos/shrinath-hero.mp4')}
+          poster={getAssetPath('/assets/ai/shrinath-about.png')}
           autoPlay
           muted
           loop
@@ -558,8 +559,8 @@ export const Hero = ({ isReady }) => {
             {/* The Master Talking-Head Video: Intro -> Experience continuous flow */}
             <video
               ref={videoRef}
-              src={currentVideo === 'intro' ? '/assets/videos/shrinath-intro.mp4' : '/assets/videos/shrinath-experience.mp4'}
-              poster="/assets/videos/shrinath-intro-poster.jpg"
+              src={currentVideo === 'intro' ? getAssetPath('/assets/videos/shrinath-intro.mp4') : getAssetPath('/assets/videos/shrinath-experience.mp4')}
+              poster={getAssetPath('/assets/videos/shrinath-intro-poster.jpg')}
               autoPlay
               muted={isMuted}
               loop={false}

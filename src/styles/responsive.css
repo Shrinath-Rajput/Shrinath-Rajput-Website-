@@ -37,7 +37,7 @@
   display: grid !important;
   grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr) !important;
   gap: clamp(2rem, 3.5vw, 4.5rem) !important;
-  align-items: stretch !important;
+  align-items: start !important;
 }
 
 .about-focus-grid {

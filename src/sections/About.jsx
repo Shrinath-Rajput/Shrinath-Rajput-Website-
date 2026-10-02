@@ -23,6 +23,7 @@ import {
   Radio,
 } from 'lucide-react';
 import { aboutInfo } from '../data/aboutInfo';
+import { getAssetPath } from '../utils/assets';
 import shrinathProfileImg from '../shrinath_thumbsup.jpg';
 
 export const About = () => {
@@ -534,7 +535,7 @@ export const About = () => {
             display: 'grid',
             gridTemplateColumns: 'minmax(0, 0.45fr) minmax(0, 0.55fr)',
             gap: 'clamp(2rem, 3.5vw, 4.5rem)',
-            alignItems: 'stretch',
+            alignItems: 'start',
             marginBottom: 'clamp(4.5rem, 9vh, 6.5rem)',
           }}
         >
@@ -567,7 +568,7 @@ export const About = () => {
               <img
                 src={shrinathProfileImg}
                 onError={(e) => {
-                  e.target.src = '/assets/images/shrinath-master.jpg';
+                  e.target.src = getAssetPath('/assets/images/shrinath-master.jpg');
                 }}
                 alt="Shrinath Rajput Portrait"
                 style={{
@@ -702,7 +703,6 @@ export const About = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'space-between',
               gap: '1.5rem',
             }}
           >
