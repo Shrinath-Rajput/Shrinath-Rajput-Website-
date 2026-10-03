@@ -610,6 +610,130 @@ html, body {
 }
 
 /* ========================================================
+   HOME PAGE REFERENCE LAYOUT RESPONSIVE & HOVER SYSTEM
+   ======================================================== */
+
+.role-glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200, 255, 0, 0.35) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(200, 255, 0, 0.10) !important;
+}
+
+.glass-tech-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  background: rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(56, 189, 248, 0.20) !important;
+}
+
+.project-glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(200, 255, 0, 0.40) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(200, 255, 0, 0.12) !important;
+}
+
+.project-glass-card:hover img {
+  transform: scale(1.06);
+}
+
+.project-glass-card:hover .project-arrow-btn {
+  background-color: var(--accent-lime) !important;
+  border-color: var(--accent-lime) !important;
+  color: #000000 !important;
+  box-shadow: 0 0 14px var(--accent-lime);
+}
+
+.service-strip-col:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+/* Tablet Breakpoint (max-width: 1080px) */
+@media (max-width: 1080px) {
+  .hero-main-container {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 3rem !important;
+    padding-left: 0 !important;
+  }
+
+  .hero-portrait-stage {
+    order: -1;
+    margin: 0 auto;
+    width: 100% !important;
+  }
+
+  .portrait-frame {
+    max-width: 520px !important;
+    height: clamp(380px, 50vh, 480px) !important;
+  }
+
+  .glass-service-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .service-strip-col {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  #home-roles > div,
+  #home-stack > div,
+  #home-projects > div,
+  #home-cta > div {
+    grid-template-columns: 1fr !important;
+    gap: 1.8rem !important;
+  }
+
+  .home-roles-grid,
+  .home-projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  #home-cta > div {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  #home-cta > div > div {
+    align-items: center !important;
+  }
+}
+
+/* Mobile Breakpoint (max-width: 640px) */
+@media (max-width: 640px) {
+  .portrait-frame {
+    max-width: 100% !important;
+    height: clamp(340px, 46vh, 420px) !important;
+    border-radius: 20px !important;
+  }
+
+  .hud-panel-bottom {
+    width: 96% !important;
+    bottom: 10px !important;
+    padding: 0.65rem 0.8rem !important;
+    border-radius: 18px !important;
+  }
+
+  .hud-panel-bottom span:first-child {
+    font-size: 1.15rem !important;
+  }
+
+  .hud-panel-bottom span:last-child {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.06em !important;
+  }
+
+  .glass-service-strip {
+    grid-template-columns: 1fr !important;
+  }
+
+  .home-roles-grid,
+  .home-projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ========================================================
    ANIMATIONS & ACCESSIBILITY
    ======================================================== */
 

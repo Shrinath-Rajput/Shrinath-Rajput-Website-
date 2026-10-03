@@ -1,34 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ArrowDown, Cpu, Sparkles, ArrowUpRight, Terminal, Volume2, VolumeX } from 'lucide-react';
-import { MagneticButton } from '../components/MagneticButton';
-import { HeroInfoGrid } from '../components/HeroInfoGrid';
-import { marqueeTechnologies } from '../data/skills';
+import {
+  ArrowUpRight,
+  Mail,
+  Volume2,
+  VolumeX,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { getAssetPath } from '../utils/assets';
+import { HolographicGlobe } from '../components/HolographicGlobe';
+import { WaveGridCanvas } from '../components/WaveGridCanvas';
+import { AiNeuralBackdrop } from '../components/AiNeuralBackdrop';
+import { SocialIcon } from '../components/SocialIcons';
+import introVideo from '../gemini_generated_video_2d15ab03.mp4';
+import newVideo from '../new.mp4';
 
 export const Hero = ({ isReady }) => {
   const heroRef = useRef(null);
+  const leftColRef = useRef(null);
+  const rightColRef = useRef(null);
   const title1Ref = useRef(null);
   const title2Ref = useRef(null);
-  const videoContainerRef = useRef(null);
   const videoRef = useRef(null);
-  const badgeRef = useRef(null);
-  const metaRef = useRef(null);
-  const infoGridRef = useRef(null);
-  const bottomBarRef = useRef(null);
-  const bgGlowRef = useRef(null);
 
-  const [currentVideo, setCurrentVideo] = useState('intro'); // 'intro' -> 'experience'
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  // Exact 2-video continuous loop: INTRO (0) -> NEW (1) -> INTRO (0) -> NEW (1) -> LOOP
+  const videos = [introVideo, newVideo];
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
-  const [videoError, setVideoError] = useState(false);
 
-  // Single audio source: ONLY the active MP4 video's original audio track
+  // Real portfolio social links
+  const socialIcons = [
+    { id: 'github', url: 'https://github.com/Shrinath-Rajput', label: 'GitHub' },
+    { id: 'linkedin', url: 'https://www.linkedin.com/in/shrinath-rajput-91b437253/', label: 'LinkedIn' },
+    { id: 'email', isEmail: true, url: 'mailto:rajputshrinath349@gmail.com', label: 'Email' },
+    { id: 'whatsapp', url: 'https://wa.me/919699510445', label: 'WhatsApp' },
+    { id: 'instagram', url: 'https://www.instagram.com/shrinath.rajput14', label: 'Instagram' },
+    { id: 'youtube', url: 'https://www.youtube.com/@ShrinathRajput-A14k', label: 'YouTube' },
+  ];
+
+  // Control ONLY the original audio track of the active video
   const toggleSound = () => {
     const video = videoRef.current;
     if (!video) return;
-
     if (isMuted) {
       video.muted = false;
       video.volume = 1.0;
@@ -39,143 +51,59 @@ export const Hero = ({ isReady }) => {
     }
   };
 
-  // Event handler for video onEnded: transitions continuously Video 1 <-> Video 2 in an infinite loop
+  // Immediate sequential transition when video ends: INTRO -> NEW -> INTRO -> NEW -> LOOP
   const handleVideoEnded = () => {
-    const nextVideo = currentVideo === 'intro' ? 'experience' : 'intro';
-    const nextSrc = nextVideo === 'intro'
-      ? getAssetPath('/assets/videos/shrinath-intro.mp4')
-      : getAssetPath('/assets/videos/shrinath-experience.mp4');
-
-    setIsTransitioning(true);
-    const video = videoRef.current;
-    if (video) {
-      setTimeout(() => {
-        setCurrentVideo(nextVideo);
-        video.src = nextSrc;
-        video.loop = false; // ensure onEnded triggers for the next video as well
-        video.muted = isMuted;
-        video.defaultMuted = isMuted;
-        video.load();
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch((err) => {
-            console.warn(`Video ${nextVideo} play error:`, err);
-          });
-        }
-        setIsTransitioning(false);
-      }, 160);
-    }
+    setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
   };
 
-  // Ensure initial intro video autoplays safely when hero mounts
+  // Automatic transition and playback
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.src = videos[currentVideoIndex];
+    video.muted = isMuted;
+    video.load();
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch((err) => {
+        console.warn('Hero video auto-transition play error:', err);
+      });
+    }
+  }, [currentVideoIndex]);
+
+  // Initial autoplay on mount
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
       video.muted = isMuted;
-      video.defaultMuted = isMuted;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          console.warn('Hero video autoplay muted fallback:', err);
+          console.warn('Hero initial video play error:', err);
         });
       }
     }
   }, []);
 
+  // GSAP Entrance
   useEffect(() => {
     if (!isReady) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      // Step 1: Background & UI elements fade in
       tl.fromTo(
-        bgGlowRef.current,
-        { opacity: 0, scale: 0.85 },
-        { opacity: 1, scale: 1, duration: 1.6, ease: 'power2.out' }
-      )
-        .fromTo(
-          badgeRef.current,
-          { y: -25, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.9 },
-          0.2
-        )
-        // Step 2 & 3: SHRINATH typography reveals smoothly
-        .fromTo(
-          title1Ref.current,
-          { y: 90, opacity: 0, skewY: 2 },
-          { y: 0, opacity: 1, skewY: 0, duration: 1.2 },
-          0.35
-        )
-        // Step 4: RAJPUT outline reveals
-        .fromTo(
-          title2Ref.current,
-          { y: 90, opacity: 0, skewY: 2 },
-          { y: 0, opacity: 1, skewY: 0, duration: 1.2 },
-          0.5
-        )
-        // Step 5: Talking-head introduction video emerges from the background
-        .fromTo(
-          videoContainerRef.current,
-          { scale: 0.94, opacity: 0, y: 40 },
-          { scale: 1, opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' },
-          0.65
-        )
-        // Step 6: Technical labels & bottom bar
-        .fromTo(
-          metaRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          0.9
-        )
-        .fromTo(
-          infoGridRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.85 },
-          0.95
-        )
-        .fromTo(
-          bottomBarRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.9 },
-          1.05
-        );
-
-      // Step 7: Controlled 3D perspective parallax (respects prefers-reduced-motion)
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (!prefersReducedMotion) {
-        const handleMouseMove = (e) => {
-          const { clientX, clientY } = e;
-          const xPos = (clientX / window.innerWidth - 0.5) * 16;
-          const yPos = (clientY / window.innerHeight - 0.5) * 16;
-
-          // Video container 3D tilt & gentle translation
-          if (videoContainerRef.current) {
-            gsap.to(videoContainerRef.current, {
-              x: xPos * 0.65,
-              y: yPos * 0.65,
-              rotationY: xPos * 0.18,
-              rotationX: -yPos * 0.14,
-              duration: 1.4,
-              ease: 'power2.out',
-            });
-          }
-
-          // Typography counter-shift for rich cinematic depth
-          if (title1Ref.current && title2Ref.current) {
-            gsap.to([title1Ref.current, title2Ref.current], {
-              x: -xPos * 0.3,
-              y: -yPos * 0.15,
-              duration: 1.4,
-              ease: 'power2.out',
-            });
-          }
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-      }
+        leftColRef.current,
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 1.1 },
+        0.15
+      ).fromTo(
+        rightColRef.current,
+        { opacity: 0, scale: 0.96 },
+        { opacity: 1, scale: 1, duration: 1.2 },
+        0.3
+      );
     }, heroRef);
 
     return () => ctx.revert();
@@ -187,158 +115,130 @@ export const Hero = ({ isReady }) => {
       id="hero"
       style={{
         position: 'relative',
-        minHeight: '100vh',
         width: '100%',
+        minHeight: 'calc(100vh - 80px)',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        paddingTop: 'clamp(6.8rem, 12vh, 8.2rem)',
-        paddingBottom: '0.75rem',
+        alignItems: 'center',
+        paddingTop: 'clamp(4.8rem, 8.5vh, 6.2rem)',
+        paddingBottom: '1.5rem',
+        paddingLeft: '32px',
+        paddingRight: '20px',
         overflow: 'hidden',
-        backgroundColor: '#070708',
+        backgroundColor: '#05070a',
+        boxSizing: 'border-box',
       }}
     >
-      {/* Background Subtle Video Atmosphere with Dark Vignette */}
+      {/* 1. Background Cinematic 3D Undulating Wave Grid Terrain across the bottom */}
+      <WaveGridCanvas opacity={0.88} style={{ height: '62%' }} />
+
+      {/* 2. Background Glowing Wireframe Holographic Globe in Upper Right */}
       <div
         style={{
           position: 'absolute',
-          inset: 0,
+          top: '-12%',
+          right: '-6%',
+          width: 'clamp(620px, 62vw, 1020px)',
+          height: 'clamp(620px, 62vw, 1020px)',
           zIndex: 1,
           pointerEvents: 'none',
-          opacity: 0.035,
-          overflow: 'hidden',
-          filter: 'blur(16px) contrast(1.1) brightness(0.65)',
+          opacity: 0.95,
         }}
       >
-        <video
-          src={getAssetPath('/assets/videos/shrinath-hero.mp4')}
-          poster={getAssetPath('/assets/ai/shrinath-about.png')}
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        />
+        <HolographicGlobe size={920} showRings={true} speed={0.0028} />
       </div>
 
-      {/* Atmospheric Depth Lighting: Subtle Deep Blue & Lime Ambient Haze */}
+      {/* 3. Holographic AI Neural Brain & Telemetry in Center-Right Transition Zone */}
+      <AiNeuralBackdrop style={{ top: '6%', left: '38%', width: '560px', height: '520px' }} />
+
+      {/* 4. Background Subtle Radial Lighting (Ambient green and cyan depth) */}
       <div
-        ref={bgGlowRef}
         style={{
           position: 'absolute',
-          top: '30%',
-          right: '15%',
-          transform: 'translate(10%, -30%)',
-          width: 'clamp(500px, 62vw, 950px)',
-          height: 'clamp(500px, 62vw, 950px)',
+          top: '8%',
+          right: '4%',
+          width: 'clamp(520px, 56vw, 960px)',
+          height: 'clamp(520px, 56vw, 960px)',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(56, 189, 248, 0.08) 38%, rgba(200, 255, 0, 0.035) 65%, transparent 80%)',
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(34, 197, 94, 0.11) 40%, transparent 70%)',
           filter: 'blur(95px)',
           pointerEvents: 'none',
-          zIndex: 2,
+          zIndex: 1,
         }}
       />
-
-      {/* Controlled lower ambient green light behind glass panels */}
       <div
         style={{
           position: 'absolute',
-          bottom: '6%',
-          left: '18%',
-          width: 'clamp(450px, 55vw, 950px)',
-          height: 'clamp(280px, 32vh, 480px)',
+          bottom: '8%',
+          left: '4%',
+          width: 'clamp(400px, 45vw, 750px)',
+          height: 'clamp(400px, 45vw, 750px)',
           borderRadius: '50%',
-          background: 'radial-gradient(ellipse, rgba(200, 255, 0, 0.05) 0%, rgba(56, 189, 248, 0.03) 45%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(200, 255, 0, 0.06) 0%, transparent 65%)',
           filter: 'blur(85px)',
           pointerEvents: 'none',
-          zIndex: 2,
+          zIndex: 1,
         }}
       />
 
-      {/* Top Location Strip: Aligned with main hero content */}
-      <div style={{ position: 'relative', zIndex: 10, width: 'min(94vw, 1820px)', margin: '0 auto 0.75rem', padding: '0 0.25rem' }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-          }}
-        >
-          <div
-            className="hide-on-mobile glass-pill glass-reflection"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.74rem',
-              color: 'var(--text-muted)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              letterSpacing: '0.08em',
-              padding: '0.45rem 1.15rem',
-              borderRadius: '9999px',
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.02) 100%)',
-              backdropFilter: 'blur(18px)',
-              WebkitBackdropFilter: 'blur(18px)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
-              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
-            }}
-          >
-            <Cpu size={14} color="var(--accent-lime)" style={{ filter: 'drop-shadow(0 0 6px var(--accent-lime))' }} />
-            KOLHAPUR // PUNE, MAHARASHTRA
-          </div>
-        </div>
-      </div>
-
-      {/* Main Two-Column Full-Width Hero Grid: Balanced 1.08fr / 0.92fr */}
+      {/* Main Two-Column Hero Container: Tight Zero-Gap Desktop Grid */}
       <div
-        className="hero-main-grid"
+        className="hero-main-container"
         style={{
+          width: '100%',
           position: 'relative',
-          flex: 1,
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.08fr) minmax(480px, 0.92fr)',
-          alignItems: 'center',
-          gap: 'clamp(1.5rem, 3vw, 3.5rem)',
           zIndex: 5,
-          width: 'min(94vw, 1820px)',
-          margin: '0 auto',
-          padding: '0 0.25rem',
+          display: 'grid',
+          gridTemplateColumns: '46% 54%',
+          alignItems: 'center',
+          gap: 0,
         }}
       >
-        {/* Left Column: Personal Branding, Typography, Thesis, Actions */}
+        {/* ===================================================
+            LEFT COLUMN (46%): Typography, Thesis, Actions, Socials
+            =================================================== */}
         <div
-          className="hero-content"
+          ref={leftColRef}
+          className="left-content"
           style={{
-            position: 'relative',
-            zIndex: 6,
             display: 'flex',
             flexDirection: 'column',
+            gap: '1.25rem',
+            zIndex: 6,
+            position: 'relative',
             width: '100%',
-            minWidth: 0,
-            overflow: 'visible',
-            paddingLeft: 'clamp(4px, 1vw, 16px)',
+            alignSelf: 'center',
+            paddingRight: '12px',
           }}
         >
-          {/* Engineering Role Badge */}
-          <div style={{ marginBottom: '1.25rem' }}>
+          {/* Intense Glowing Backlight Aura behind SHRINATH RAJPUT */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '10%',
+              left: '-10%',
+              width: '135%',
+              height: '85%',
+              background: 'radial-gradient(ellipse at 35% 45%, rgba(34, 197, 94, 0.42) 0%, rgba(200, 255, 0, 0.22) 35%, transparent 70%)',
+              filter: 'blur(55px)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+
+          {/* Status Badge: • AI / ML ENGINEER & FULL STACK DEVELOPER */}
+          <div style={{ position: 'relative', zIndex: 2 }}>
             <div
-              ref={badgeRef}
-              className="glass-pill glass-reflection"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: '9px',
                 padding: '0.45rem 1.25rem',
                 borderRadius: '9999px',
-                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.02) 100%)',
-                backdropFilter: 'blur(18px)',
-                WebkitBackdropFilter: 'blur(18px)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(200, 255, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 15, 22, 0.65) 100%)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(200, 255, 0, 0.50)',
+                boxShadow: '0 0 20px rgba(200, 255, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.22)',
               }}
             >
               <span
@@ -355,7 +255,7 @@ export const Hero = ({ isReady }) => {
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.74rem',
-                  color: '#f8fafc',
+                  color: '#ffffff',
                   letterSpacing: '0.12em',
                   fontWeight: 600,
                   textTransform: 'uppercase',
@@ -366,516 +266,431 @@ export const Hero = ({ isReady }) => {
             </div>
           </div>
 
-          {/* Monumental Display Typography: SHRINATH / RAJPUT - 100% visible, zero clipping */}
-          <div style={{ userSelect: 'none', marginBottom: '1.5rem', width: '100%', minWidth: 0, overflow: 'visible' }}>
+          {/* Monumental Editorial Display Typography: SHRINATH / RAJPUT */}
+          <div style={{ userSelect: 'none', margin: '0.2rem 0 0.4rem', position: 'relative', zIndex: 2 }}>
             <h1
               ref={title1Ref}
-              className="hero-display-title text-metallic"
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.85rem, 4.8vw, 5.6rem)',
-                fontWeight: 800,
+                fontFamily: "'Space Grotesk', 'Syne', sans-serif",
+                fontSize: 'clamp(3.8rem, 6.4vw, 7.2rem)',
+                fontWeight: 900,
                 lineHeight: 0.88,
-                letterSpacing: '-0.03em',
+                letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
                 margin: 0,
-                padding: 0,
-                width: '100%',
-                whiteSpace: 'nowrap',
-                overflow: 'visible',
-                display: 'block',
+                color: '#ffffff',
+                textShadow: '0 4px 30px rgba(0, 0, 0, 0.6), 0 0 50px rgba(200, 255, 0, 0.28)',
               }}
             >
               SHRINATH
             </h1>
-
             <h1
               ref={title2Ref}
-              className="hero-display-title"
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.85rem, 4.8vw, 5.6rem)',
-                fontWeight: 800,
+                fontFamily: "'Space Grotesk', 'Syne', sans-serif",
+                fontSize: 'clamp(3.8rem, 6.4vw, 7.2rem)',
+                fontWeight: 900,
                 lineHeight: 0.88,
-                letterSpacing: '-0.03em',
+                letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
-                color: 'transparent',
-                WebkitTextStroke: '2px rgba(255, 255, 255, 0.75)',
                 margin: 0,
-                padding: 0,
-                width: '100%',
-                whiteSpace: 'nowrap',
-                overflow: 'visible',
-                display: 'block',
+                color: 'transparent',
+                WebkitTextStroke: '2.5px #ffffff',
+                filter: 'drop-shadow(0 0 18px rgba(200, 255, 0, 0.38))',
               }}
             >
               RAJPUT
             </h1>
           </div>
 
-          {/* Technical Metadata & Quick Actions */}
-          <div ref={metaRef}>
-            <p
+          {/* Description */}
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'clamp(0.95rem, 1.25vw, 1.08rem)',
+              lineHeight: 1.65,
+              color: '#cbd5e1',
+              maxWidth: '560px',
+              margin: '0.2rem 0 0.65rem',
+              position: 'relative',
+              zIndex: 2,
+            }}
+          >
+            Architecting intelligent neural pipelines, autonomous agent systems, and edge computer vision software engineered for production-grade scale.
+          </p>
+
+          {/* Buttons: Horizontally aligned on desktop */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+            <Link
+              to="/work"
+              className="glass-reflection"
               style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: 'clamp(0.92rem, 1.35vw, 1.08rem)',
-                lineHeight: 1.7,
-                color: 'var(--text-muted)',
-                maxWidth: '490px',
-                marginBottom: '1.85rem',
-              }}
-            >
-              Architecting intelligent neural pipelines, autonomous agent systems, and edge computer vision software engineered for production-grade scale.
-            </p>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
-              <MagneticButton
-                to="/work"
-                className="glass-reflection"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '0.85rem 1.85rem',
-                  borderRadius: '9999px',
-                  backgroundColor: 'var(--accent-lime)',
-                  color: '#000000',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.82rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.06em',
-                  boxShadow: '0 0 30px rgba(200, 255, 0, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.45)',
-                  border: '1px solid rgba(200, 255, 0, 0.8)',
-                  transition: 'all 0.25s ease',
-                  textDecoration: 'none',
-                }}
-              >
-                SELECTED WORK
-                <ArrowUpRight size={16} />
-              </MagneticButton>
-
-              <MagneticButton
-                to="/contact"
-                className="glass-pill glass-reflection"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '0.85rem 1.6rem',
-                  fontSize: '0.82rem',
-                  fontFamily: 'var(--font-mono)',
-                  color: '#ffffff',
-                  fontWeight: 600,
-                  letterSpacing: '0.06em',
-                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.035) 50%, rgba(255, 255, 255, 0.015) 100%)',
-                  backdropFilter: 'blur(18px)',
-                  WebkitBackdropFilter: 'blur(18px)',
-                  border: '1px solid rgba(255, 255, 255, 0.20)',
-                  boxShadow: '0 8px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
-                  transition: 'all 250ms ease',
-                  textDecoration: 'none',
-                }}
-              >
-                GET IN TOUCH
-              </MagneticButton>
-            </div>
-
-            {/* Editorial Index Indicator matching Reference Image */}
-            <div
-              style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
-                gap: '1.25rem',
-                marginTop: '2.4rem',
+                gap: '8px',
+                padding: '0.88rem 1.95rem',
+                borderRadius: '9999px',
+                backgroundColor: 'var(--accent-lime)',
+                color: '#000000',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.8rem',
-                color: 'rgba(255, 255, 255, 0.4)',
-                letterSpacing: '0.12em',
+                fontSize: '0.84rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textDecoration: 'none',
+                boxShadow: '0 0 28px rgba(200, 255, 0, 0.45)',
+                border: '1px solid rgba(200, 255, 0, 0.8)',
+                transition: 'all 0.25s ease',
               }}
             >
-              <span style={{ color: '#ffffff', fontWeight: 600 }}>01</span>
-              <span style={{ width: '55px', height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.2)' }} />
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', fontSize: '0.72rem' }}>
-                  AI / ML ENGINEER
-                </span>
-                <span style={{ width: '18px', height: '2px', backgroundColor: 'var(--accent-lime)' }} />
-              </div>
-            </div>
+              VIEW MY WORK <ArrowUpRight size={17} />
+            </Link>
+
+            <Link
+              to="/contact"
+              className="glass-pill glass-reflection"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '0.88rem 1.85rem',
+                borderRadius: '9999px',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.22)',
+                color: '#ffffff',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.84rem',
+                fontWeight: 600,
+                letterSpacing: '0.06em',
+                textDecoration: 'none',
+                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.35)',
+                transition: 'all 0.25s ease',
+              }}
+            >
+              GET IN TOUCH
+            </Link>
+          </div>
+
+          {/* Circular Glass Social Buttons (GitHub, LinkedIn, Email, WhatsApp, Instagram, YouTube) */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginTop: '0.65rem',
+              position: 'relative',
+              zIndex: 2,
+            }}
+          >
+            {socialIcons.map((item) => (
+              <a
+                key={item.id}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-social-btn"
+                aria-label={item.label}
+                style={{
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid rgba(255, 255, 255, 0.16)',
+                  color: '#cbd5e1',
+                  backdropFilter: 'blur(12px)',
+                  transition: 'all 0.25s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(200, 255, 0, 0.15)';
+                  e.currentTarget.style.borderColor = 'rgba(200, 255, 0, 0.55)';
+                  e.currentTarget.style.color = '#c8ff00';
+                  e.currentTarget.style.boxShadow = '0 0 16px rgba(200, 255, 0, 0.3)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.16)';
+                  e.currentTarget.style.color = '#cbd5e1';
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {item.isEmail ? <Mail size={17} /> : <SocialIcon id={item.id} size={17} />}
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Right Column: Full Talking-Head Video of Shrinath */}
+        {/* ===================================================
+            RIGHT COLUMN (54%): Seamless Holographic Video Immersion & Stats
+            =================================================== */}
         <div
-          ref={videoContainerRef}
-          className="hero-video-col"
+          ref={rightColRef}
+          className="hero-portrait-stage video-area"
           style={{
             position: 'relative',
             width: '100%',
-            height: 'clamp(480px, 66vh, 680px)',
+            height: '100%',
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
             justifyContent: 'center',
-            perspective: '1000px',
-            transformStyle: 'preserve-3d',
+            alignSelf: 'center',
+            zIndex: 6,
+            transform: 'translateX(-32px)',
           }}
         >
-          {/* Subtle Ambient Rim Glow behind Video */}
+          {/* Seamless Holographic Video Stage (Borderless & Embedded into Cyber Environment) */}
           <div
-            style={{
-              position: 'absolute',
-              top: '5%',
-              left: '5%',
-              width: '90%',
-              height: '90%',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.20) 0%, rgba(56, 189, 248, 0.08) 40%, rgba(200, 255, 0, 0.035) 60%, transparent 75%)',
-              filter: 'blur(60px)',
-              zIndex: 1,
-              pointerEvents: 'none',
-            }}
-          />
-
-          {/* Integrated Video Frame with Seamless Glassmorphism Border */}
-          <div
-            className="hero-video-stage video-frame glass-reflection"
+            className="portrait-frame"
             style={{
               position: 'relative',
               width: '100%',
-              height: '100%',
+              maxWidth: '880px',
+              height: 'clamp(540px, 75vh, 740px)',
               borderRadius: '28px',
               overflow: 'hidden',
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.035) 40%, rgba(255, 255, 255, 0.02) 100%)',
-              backdropFilter: 'blur(25px) saturate(170%)',
-              WebkitBackdropFilter: 'blur(25px) saturate(170%)',
-              border: '1px solid rgba(255, 255, 255, 0.22)',
-              boxShadow: '0 30px 100px rgba(0, 0, 0, 0.55), 0 0 60px rgba(163, 230, 53, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+              background: 'transparent',
+              border: 'none',
+              boxShadow: 'none',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               zIndex: 3,
+              WebkitMaskImage: 'radial-gradient(ellipse 96% 94% at 50% 50%, black 82%, transparent 100%)',
+              maskImage: 'radial-gradient(ellipse 96% 94% at 50% 50%, black 82%, transparent 100%)',
             }}
           >
-            {/* The Master Talking-Head Video: Intro -> Experience continuous flow */}
+            {/* The Master Continuous Video Sequence Player: INTRO -> NEW -> INTRO -> NEW -> LOOP */}
             <video
               ref={videoRef}
-              src={currentVideo === 'intro' ? getAssetPath('/assets/videos/shrinath-intro.mp4') : getAssetPath('/assets/videos/shrinath-experience.mp4')}
-              poster={getAssetPath('/assets/videos/shrinath-intro-poster.jpg')}
+              src={videos[currentVideoIndex]}
               autoPlay
               muted={isMuted}
               loop={false}
               playsInline
-              controls={false}
-              preload="auto"
               onEnded={handleVideoEnded}
               style={{
                 width: '100%',
                 height: '100%',
-                display: 'block',
                 objectFit: 'cover',
-                objectPosition: 'center 12%',
-                borderRadius: '22px',
-                filter: 'contrast(1.03) brightness(0.98)',
-                opacity: isTransitioning ? 0.35 : 1,
-                transition: 'opacity 0.2s ease-in-out',
+                objectPosition: 'center 20%',
+                display: 'block',
               }}
             />
 
-            {/* Left Edge Cinematic Gradient Blending: seamless fade into obsidian dark background */}
+            {/* Subtle Edge Vignette */}
             <div
               style={{
                 position: 'absolute',
-                top: 0,
-                bottom: 0,
-                left: 0,
-                width: '26%',
-                background: 'linear-gradient(to right, #06070a 0%, rgba(6, 7, 10, 0.8) 40%, transparent 100%)',
+                inset: 0,
+                boxShadow: 'inset 0 0 50px rgba(5, 7, 10, 0.85)',
                 pointerEvents: 'none',
                 zIndex: 4,
               }}
             />
+          </div>
 
-            {/* Bottom Edge Fade into Hero Floor */}
+          {/* Floating Top-Right Live Controls (LIVE AI + SOUND OFF Side-by-Side matching Reference) */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '18px',
+              right: '24px',
+              zIndex: 12,
+              display: 'flex',
+              gap: '10px',
+              alignItems: 'center',
+            }}
+          >
+            {/* LIVE AI Pill */}
             <div
+              className="glass-pill glass-reflection"
               style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '24%',
-                background: 'linear-gradient(to top, #06070a 0%, rgba(6, 7, 10, 0.75) 45%, transparent 100%)',
-                pointerEvents: 'none',
-                zIndex: 4,
+                padding: '0.42rem 0.95rem',
+                borderRadius: '9999px',
+                backgroundColor: 'rgba(8, 14, 22, 0.72)',
+                border: '1px solid rgba(200, 255, 0, 0.45)',
+                color: '#ffffff',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                backdropFilter: 'blur(16px)',
+                boxShadow: '0 0 15px rgba(200, 255, 0, 0.18)',
+                userSelect: 'none',
               }}
-            />
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--accent-lime)',
+                  boxShadow: '0 0 8px var(--accent-lime)',
+                  display: 'inline-block',
+                  animation: 'pulseGlow 2s ease-in-out infinite',
+                }}
+              />
+              LIVE AI
+            </div>
 
-            {/* Top Subtle Edge Fade */}
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '14%',
-                background: 'linear-gradient(to bottom, rgba(6, 7, 10, 0.45) 0%, transparent 100%)',
-                pointerEvents: 'none',
-                zIndex: 4,
-              }}
-            />
-
-            {/* Right Subtle Edge Fade */}
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                bottom: 0,
-                right: 0,
-                width: '12%',
-                background: 'linear-gradient(to left, rgba(6, 7, 10, 0.45) 0%, transparent 100%)',
-                pointerEvents: 'none',
-                zIndex: 4,
-              }}
-            />
-
-            {/* Minimal Sound Control Glass Pill Button */}
+            {/* Native Sound Toggle Pill */}
             <button
               type="button"
               onClick={toggleSound}
-              className="glass-pill interactive-target glass-reflection"
+              className="glass-pill glass-reflection"
               style={{
-                position: 'absolute',
-                bottom: '1.25rem',
-                right: '1.25rem',
-                zIndex: 10,
+                padding: '0.42rem 0.95rem',
+                borderRadius: '9999px',
+                backgroundColor: isMuted ? 'rgba(8, 14, 22, 0.72)' : 'rgba(200, 255, 0, 0.22)',
+                border: isMuted ? '1px solid rgba(255, 255, 255, 0.22)' : '1px solid rgba(200, 255, 0, 0.65)',
+                color: '#ffffff',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                letterSpacing: '0.06em',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '9px',
-                padding: '0.52rem 1.15rem',
-                borderRadius: '9999px',
-                background: isMuted
-                  ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(12, 16, 20, 0.6) 100%)'
-                  : 'linear-gradient(135deg, rgba(200, 255, 0, 0.22) 0%, rgba(200, 255, 0, 0.08) 100%)',
-                border: isMuted ? '1px solid rgba(255, 255, 255, 0.20)' : '1px solid rgba(200, 255, 0, 0.55)',
-                color: isMuted ? '#cbd5e1' : '#ffffff',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.74rem',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
+                gap: '6px',
                 cursor: 'pointer',
-                boxShadow: isMuted
-                  ? '0 8px 30px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18)'
-                  : '0 0 25px rgba(200, 255, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25)',
+                backdropFilter: 'blur(16px)',
+                boxShadow: '0 0 15px rgba(200, 255, 0, 0.15)',
                 transition: 'all 0.25s ease',
               }}
-              title={isMuted ? 'Turn Sound ON' : 'Turn Sound OFF'}
-              aria-label={isMuted ? 'Play introduction video sound' : 'Mute introduction video sound'}
+              title={isMuted ? 'Turn Sound On' : 'Mute'}
+              aria-label={isMuted ? 'Turn sound on' : 'Mute sound'}
             >
-              {isMuted ? (
-                <VolumeX size={15} color="#94a3b8" />
-              ) : (
-                <Volume2 size={15} color="var(--accent-lime)" />
-              )}
-              <span style={{ color: isMuted ? '#94a3b8' : '#ffffff' }}>
+              {isMuted ? <VolumeX size={14} color="#cbd5e1" /> : <Volume2 size={14} color="var(--accent-lime)" />}
+              <span style={{ color: '#ffffff' }}>
                 {isMuted ? 'SOUND OFF' : 'SOUND ON'}
               </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '3px', height: '14px', marginLeft: '3px' }}>
-                {[0.1, 0.3, 0.15, 0.42, 0.2].map((delay, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      width: '2.5px',
-                      height: isMuted ? '4px' : '13px',
-                      backgroundColor: isMuted ? '#64748b' : 'var(--accent-lime)',
-                      borderRadius: '1px',
-                      display: 'inline-block',
-                      animation: isMuted ? 'none' : `soundWave 0.7s ease-in-out infinite alternate`,
-                      animationDelay: `${delay}s`,
-                      transition: 'height 0.2s ease, background-color 0.2s ease',
-                    }}
-                  />
-                ))}
-              </div>
             </button>
           </div>
-        </div>
-      </div>
 
-      {/* Hero Information Panels: Factual Personal Details in Futuristic Glass Panels */}
-      <div ref={infoGridRef} style={{ width: '100%', position: 'relative', zIndex: 8 }}>
-        <HeroInfoGrid />
-      </div>
-
-      {/* Bottom Tech Stack Bar: Full Premium Glassmorphism Capsule */}
-      <div
-        ref={bottomBarRef}
-        className="glass-reflection"
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          width: 'min(94vw, 1820px)',
-          margin: '1.25rem auto 0.65rem',
-          height: 'clamp(66px, 7.5vh, 74px)',
-          borderRadius: '9999px',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 14, 20, 0.52) 40%, rgba(10, 14, 20, 0.44) 100%)',
-          backdropFilter: 'blur(30px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(30px) saturate(180%)',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45), 0 0 35px rgba(200, 255, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.20), inset 0 0 30px rgba(255, 255, 255, 0.02)',
-          padding: '0 clamp(1.2rem, 2.5vw, 2.5rem)',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            gap: '1.25rem',
-          }}
-        >
-          {/* Left Title Label: TECH STACK • */}
+          {/* Wide Integrated Glass Statistics Bar: Floating across lower edge of video (13+ PROJECTS | 5+ CERTIFICATIONS | 2+ INTERNSHIPS) */}
           <div
+            className="hud-panel-bottom glass-reflection"
             style={{
-              display: 'inline-flex',
+              position: 'absolute',
+              bottom: '16px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '92%',
+              maxWidth: '720px',
+              zIndex: 14,
+              borderRadius: '24px',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(8, 14, 22, 0.88) 100%)',
+              backdropFilter: 'blur(28px)',
+              WebkitBackdropFilter: 'blur(28px)',
+              border: '1.5px solid rgba(200, 255, 0, 0.45)',
+              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(200, 255, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.25)',
+              padding: '0.95rem 1.6rem',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1px 1fr 1px 1fr',
               alignItems: 'center',
-              gap: '8px',
-              paddingRight: '1.25rem',
-              borderRight: '1px solid rgba(255, 255, 255, 0.12)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.76rem',
-              fontWeight: 700,
-              color: '#ffffff',
-              letterSpacing: '0.12em',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
             }}
           >
-            TECH STACK
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--accent-lime)',
-                boxShadow: '0 0 8px var(--accent-lime)',
-                display: 'inline-block',
-              }}
-            />
-          </div>
+            {/* Stat 1: 13+ PROJECTS */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <span
+                style={{
+                  fontFamily: "'Space Grotesk', 'Syne', sans-serif",
+                  fontSize: 'clamp(1.4rem, 1.8vw, 1.75rem)',
+                  fontWeight: 900,
+                  color: 'var(--accent-lime)',
+                  lineHeight: 1,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                13+
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.72rem',
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  marginTop: '5px',
+                }}
+              >
+                PROJECTS
+              </span>
+            </div>
 
-          {/* Marquee Technology Track */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
-            <div className="marquee-track" style={{ display: 'flex', alignItems: 'center' }}>
-              {[
-                { name: 'PYTHON', icon: '🐍' },
-                { name: 'PYTORCH', icon: '🔥' },
-                { name: 'TENSORFLOW', icon: '⚡' },
-                { name: 'REACT', icon: '⚛' },
-                { name: 'NODE.JS', icon: '⬢' },
-                { name: 'EXPRESS.JS', icon: 'ex' },
-                { name: 'OPENCV', icon: '◎' },
-                { name: 'YOLO', icon: '∞' },
-                { name: 'SCIKIT-LEARN', icon: '◈' },
-                { name: 'PANDAS', icon: '🐼' },
-                { name: 'NUMPY', icon: '🔢' },
-                { name: 'VITE', icon: '⚡' },
-                { name: 'STREAMLIT', icon: '👑' },
-                { name: 'FASTAPI', icon: '🚀' },
-                { name: 'PYTHON', icon: '🐍' },
-                { name: 'PYTORCH', icon: '🔥' },
-                { name: 'TENSORFLOW', icon: '⚡' },
-                { name: 'REACT', icon: '⚛' },
-                { name: 'NODE.JS', icon: '⬢' },
-                { name: 'EXPRESS.JS', icon: 'ex' },
-                { name: 'OPENCV', icon: '◎' },
-                { name: 'YOLO', icon: '∞' },
-                { name: 'SCIKIT-LEARN', icon: '◈' },
-                { name: 'PANDAS', icon: '🐼' },
-                { name: 'NUMPY', icon: '🔢' },
-                { name: 'VITE', icon: '⚡' },
-                { name: 'STREAMLIT', icon: '👑' },
-                { name: 'FASTAPI', icon: '🚀' },
-              ].map((tech, idx) => (
-                <span
-                  key={`${tech.name}-${idx}`}
-                  className="glass-pill glass-reflection"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '7px',
-                    padding: '0.36rem 0.95rem',
-                    borderRadius: '9999px',
-                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.035) 50%, rgba(255, 255, 255, 0.015) 100%)',
-                    backdropFilter: 'blur(14px)',
-                    WebkitBackdropFilter: 'blur(14px)',
-                    border: '1px solid rgba(255, 255, 255, 0.16)',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14)',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.74rem',
-                    fontWeight: 600,
-                    color: '#e2e8f0',
-                    letterSpacing: '0.06em',
-                    marginRight: '0.85rem',
-                    whiteSpace: 'nowrap',
-                    flexShrink: 0,
-                    transition: 'all 0.25s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(200, 255, 0, 0.5)';
-                    e.currentTarget.style.boxShadow = '0 0 20px rgba(200, 255, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.22)';
-                    e.currentTarget.style.color = '#ffffff';
-                    e.currentTarget.style.transform = 'translateY(-1px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.16)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14)';
-                    e.currentTarget.style.color = '#e2e8f0';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
-                >
-                  <span style={{ fontSize: '0.85rem' }}>{tech.icon}</span>
-                  <span>{tech.name}</span>
-                </span>
-              ))}
+            {/* Divider */}
+            <span style={{ width: '1px', height: '36px', backgroundColor: 'rgba(255, 255, 255, 0.18)', justifySelf: 'center' }} />
+
+            {/* Stat 2: 5+ CERTIFICATIONS */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <span
+                style={{
+                  fontFamily: "'Space Grotesk', 'Syne', sans-serif",
+                  fontSize: 'clamp(1.4rem, 1.8vw, 1.75rem)',
+                  fontWeight: 900,
+                  color: 'var(--accent-lime)',
+                  lineHeight: 1,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                5+
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.72rem',
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  marginTop: '5px',
+                }}
+              >
+                CERTIFICATIONS
+              </span>
+            </div>
+
+            {/* Divider */}
+            <span style={{ width: '1px', height: '36px', backgroundColor: 'rgba(255, 255, 255, 0.18)', justifySelf: 'center' }} />
+
+            {/* Stat 3: 2+ INTERNSHIPS */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <span
+                style={{
+                  fontFamily: "'Space Grotesk', 'Syne', sans-serif",
+                  fontSize: 'clamp(1.4rem, 1.8vw, 1.75rem)',
+                  fontWeight: 900,
+                  color: 'var(--accent-lime)',
+                  lineHeight: 1,
+                  letterSpacing: '0.02em',
+                }}
+              >
+                2+
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.72rem',
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  marginTop: '5px',
+                }}
+              >
+                INTERNSHIPS
+              </span>
             </div>
           </div>
-
-          {/* Right Link: AND MORE ↗ */}
-          <Link
-            to="/stack"
-            className="glass-pill"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              color: 'var(--text-muted)',
-              letterSpacing: '0.08em',
-              whiteSpace: 'nowrap',
-              padding: '0.35rem 0.85rem',
-              borderRadius: '9999px',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              flexShrink: 0,
-              transition: 'all 0.2s ease',
-              textDecoration: 'none',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--accent-lime)';
-              e.currentTarget.style.borderColor = 'rgba(200, 255, 0, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--text-muted)';
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
-            }}
-          >
-            AND MORE
-            <ArrowUpRight size={13} color="var(--accent-lime)" />
-          </Link>
         </div>
       </div>
     </section>

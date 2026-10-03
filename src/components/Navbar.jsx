@@ -35,38 +35,39 @@ export const Navbar = () => {
         className="glass-navbar glass-reflection"
         style={{
           position: 'fixed',
-          top: scrolled ? '12px' : '20px',
+          top: scrolled ? '10px' : '16px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: 'min(94vw, 1820px)',
-          height: 'clamp(68px, 8vh, 76px)',
+          width: 'calc(100vw - 32px)',
+          maxWidth: '1920px',
+          height: 'clamp(66px, 7.8vh, 74px)',
           zIndex: 9000,
           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 clamp(1.5rem, 2.8vw, 3rem)',
+          padding: '0 clamp(1.2rem, 2.4vw, 2.8rem)',
           borderRadius: '9999px',
           background:
-            'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 14, 20, 0.52) 40%, rgba(10, 14, 20, 0.44) 100%)',
+            'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 14, 20, 0.65) 40%, rgba(8, 12, 18, 0.72) 100%)',
           backdropFilter: 'blur(28px) saturate(180%)',
           WebkitBackdropFilter: 'blur(28px) saturate(180%)',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
+          border: '1px solid rgba(255, 255, 255, 0.20)',
           boxShadow:
-            '0 15px 50px rgba(0, 0, 0, 0.45), 0 0 35px rgba(200, 255, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.20), inset 0 0 30px rgba(255, 255, 255, 0.02)',
+            '0 15px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(200, 255, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.02)',
         }}
       >
-        {/* Brand Logo - Routes back to Home */}
+        {/* Brand Logo matching • SHRINATH • in Reference */}
         <Link
           to="/"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
+            gap: '8px',
             fontFamily: 'var(--font-display)',
             fontWeight: 800,
-            fontSize: 'clamp(1.2rem, 1.45vw, 1.4rem)',
-            letterSpacing: '0.04em',
+            fontSize: 'clamp(1.1rem, 1.35vw, 1.35rem)',
+            letterSpacing: '0.08em',
             color: '#ffffff',
             textDecoration: 'none',
             flexShrink: 0,
@@ -74,15 +75,15 @@ export const Navbar = () => {
         >
           <span
             style={{
-              width: '8px',
-              height: '8px',
+              width: '7px',
+              height: '7px',
               backgroundColor: 'var(--accent-lime)',
               borderRadius: '50%',
               boxShadow: '0 0 10px var(--accent-lime)',
               display: 'inline-block',
             }}
           />
-          SHRINATH<span style={{ color: 'var(--accent-lime)' }}>.</span>
+          SHRINATH
         </Link>
 
         {/* Center Desktop Navigation: Dedicated Page Route Links */}
