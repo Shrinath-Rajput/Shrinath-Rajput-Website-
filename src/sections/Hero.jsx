@@ -56,18 +56,23 @@ export const Hero = ({ isReady }) => {
     setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
   };
 
-  // Automatic transition and playback
+  // Automatic transition and playback without redundant reloads
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.src = videos[currentVideoIndex];
+    video.defaultMuted = true;
     video.muted = isMuted;
-    video.load();
+
+    // Only update source if different to avoid reloading already playing video
+    if (video.src !== videos[currentVideoIndex] && !video.src.endsWith(videos[currentVideoIndex])) {
+      video.src = videos[currentVideoIndex];
+    }
+
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch((err) => {
-        console.warn('Hero video auto-transition play error:', err);
+        console.warn('Hero video auto-transition play handled:', err);
       });
     }
   }, [currentVideoIndex]);
@@ -76,11 +81,14 @@ export const Hero = ({ isReady }) => {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      video.muted = isMuted;
+      video.defaultMuted = true;
+      video.muted = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
-          console.warn('Hero initial video play error:', err);
+          console.warn('Hero initial video play handled:', err);
         });
       }
     }
@@ -113,6 +121,7 @@ export const Hero = ({ isReady }) => {
     <section
       ref={heroRef}
       id="hero"
+      className="hero-section-root"
       style={{
         position: 'relative',
         width: '100%',
@@ -133,6 +142,7 @@ export const Hero = ({ isReady }) => {
 
       {/* 2. Background Glowing Wireframe Holographic Globe in Upper Right */}
       <div
+        className="hero-globe-layer"
         style={{
           position: 'absolute',
           top: '-12%',
@@ -148,10 +158,14 @@ export const Hero = ({ isReady }) => {
       </div>
 
       {/* 3. Holographic AI Neural Brain & Telemetry in Center-Right Transition Zone */}
-      <AiNeuralBackdrop style={{ top: '6%', left: '38%', width: '560px', height: '520px' }} />
+      <AiNeuralBackdrop
+        className="hero-neural-layer"
+        style={{ top: '6%', left: '38%', width: '560px', height: '520px' }}
+      />
 
       {/* 4. Background Subtle Radial Lighting (Ambient green and cyan depth) */}
       <div
+        className="hero-ambient-glow-1"
         style={{
           position: 'absolute',
           top: '8%',
@@ -166,6 +180,7 @@ export const Hero = ({ isReady }) => {
         }}
       />
       <div
+        className="hero-ambient-glow-2"
         style={{
           position: 'absolute',
           bottom: '8%',
@@ -198,7 +213,7 @@ export const Hero = ({ isReady }) => {
             =================================================== */}
         <div
           ref={leftColRef}
-          className="left-content"
+          className="left-content hero-left-col"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -212,6 +227,7 @@ export const Hero = ({ isReady }) => {
         >
           {/* Intense Glowing Backlight Aura behind SHRINATH RAJPUT */}
           <div
+            className="hero-backlight-aura"
             style={{
               position: 'absolute',
               top: '10%',
@@ -228,6 +244,7 @@ export const Hero = ({ isReady }) => {
           {/* Status Badge: • AI / ML ENGINEER & FULL STACK DEVELOPER */}
           <div style={{ position: 'relative', zIndex: 2 }}>
             <div
+              className="hero-status-pill"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -270,9 +287,10 @@ export const Hero = ({ isReady }) => {
           <div style={{ userSelect: 'none', margin: '0.2rem 0 0.4rem', position: 'relative', zIndex: 2 }}>
             <h1
               ref={title1Ref}
+              className="hero-name-title"
               style={{
                 fontFamily: "'Space Grotesk', 'Syne', sans-serif",
-                fontSize: 'clamp(3.8rem, 6.4vw, 7.2rem)',
+                fontSize: 'clamp(2.1rem, 10.5vw, 7.2rem)',
                 fontWeight: 900,
                 lineHeight: 0.88,
                 letterSpacing: '-0.02em',
@@ -280,15 +298,17 @@ export const Hero = ({ isReady }) => {
                 margin: 0,
                 color: '#ffffff',
                 textShadow: '0 4px 30px rgba(0, 0, 0, 0.6), 0 0 50px rgba(200, 255, 0, 0.28)',
+                wordBreak: 'break-word',
               }}
             >
               SHRINATH
             </h1>
             <h1
               ref={title2Ref}
+              className="hero-name-title hero-name-stroke"
               style={{
                 fontFamily: "'Space Grotesk', 'Syne', sans-serif",
-                fontSize: 'clamp(3.8rem, 6.4vw, 7.2rem)',
+                fontSize: 'clamp(2.1rem, 10.5vw, 7.2rem)',
                 fontWeight: 900,
                 lineHeight: 0.88,
                 letterSpacing: '-0.02em',
@@ -297,6 +317,7 @@ export const Hero = ({ isReady }) => {
                 color: 'transparent',
                 WebkitTextStroke: '2.5px #ffffff',
                 filter: 'drop-shadow(0 0 18px rgba(200, 255, 0, 0.38))',
+                wordBreak: 'break-word',
               }}
             >
               RAJPUT
@@ -305,6 +326,7 @@ export const Hero = ({ isReady }) => {
 
           {/* Description */}
           <p
+            className="hero-intro-desc"
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: 'clamp(0.95rem, 1.25vw, 1.08rem)',
@@ -320,7 +342,7 @@ export const Hero = ({ isReady }) => {
           </p>
 
           {/* Buttons: Horizontally aligned on desktop */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', position: 'relative', zIndex: 2 }}>
+          <div className="hero-action-buttons" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', position: 'relative', zIndex: 2 }}>
             <Link
               to="/work"
               className="glass-reflection"
@@ -374,6 +396,7 @@ export const Hero = ({ isReady }) => {
 
           {/* Circular Glass Social Buttons (GitHub, LinkedIn, Email, WhatsApp, Instagram, YouTube) */}
           <div
+            className="hero-socials-row"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -381,6 +404,7 @@ export const Hero = ({ isReady }) => {
               marginTop: '0.65rem',
               position: 'relative',
               zIndex: 2,
+              flexWrap: 'wrap',
             }}
           >
             {socialIcons.map((item) => (
@@ -473,12 +497,14 @@ export const Hero = ({ isReady }) => {
               muted={isMuted}
               loop={false}
               playsInline
+              webkit-playsinline="true"
+              preload="metadata"
               onEnded={handleVideoEnded}
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: 'center 20%',
+                objectPosition: 'center 18%',
                 display: 'block',
               }}
             />
@@ -497,6 +523,7 @@ export const Hero = ({ isReady }) => {
 
           {/* Floating Top-Right Live Controls (LIVE AI + SOUND OFF Side-by-Side matching Reference) */}
           <div
+            className="hero-live-controls"
             style={{
               position: 'absolute',
               top: '18px',

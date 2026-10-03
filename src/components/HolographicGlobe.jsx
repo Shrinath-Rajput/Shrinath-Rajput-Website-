@@ -165,8 +165,10 @@ export const HolographicGlobe = ({
       ref={canvasRef}
       className={className}
       style={{
-        width: `${size}px`,
-        height: `${size}px`,
+        width: '100%',
+        height: '100%',
+        maxWidth: `${size}px`,
+        maxHeight: `${size}px`,
         pointerEvents: 'none',
         ...style,
       }}

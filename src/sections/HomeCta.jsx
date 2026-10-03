@@ -112,6 +112,7 @@ export const HomeCta = () => {
 
           {/* Monumental Heading */}
           <h2
+            className="home-cta-heading"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2.4rem, 5vw, 4.4rem)',
@@ -122,6 +123,7 @@ export const HomeCta = () => {
               textTransform: 'uppercase',
               lineHeight: 1.05,
               textShadow: '0 4px 30px rgba(0, 0, 0, 0.7), 0 0 40px rgba(200, 255, 0, 0.15)',
+              wordBreak: 'break-word',
             }}
           >
             LET'S BUILD<br />

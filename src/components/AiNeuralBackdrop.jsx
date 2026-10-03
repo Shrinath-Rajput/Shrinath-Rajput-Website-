@@ -12,6 +12,7 @@ export const AiNeuralBackdrop = ({
         top: '5%',
         right: '4%',
         width: '520px',
+        maxWidth: '100%',
         height: '480px',
         pointerEvents: 'none',
         zIndex: 1,
