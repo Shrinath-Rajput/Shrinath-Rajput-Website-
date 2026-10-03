@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { getAssetPath } from '../utils/assets';
 
 export const HomeFeaturedProjects = () => {
   const featured = [
@@ -195,7 +196,7 @@ export const HomeFeaturedProjects = () => {
                 }}
               >
                 <img
-                  src={item.image}
+                  src={getAssetPath(item.image)}
                   alt={item.title}
                   style={{
                     width: '100%',
@@ -204,7 +205,7 @@ export const HomeFeaturedProjects = () => {
                     transition: 'transform 0.4s ease',
                   }}
                   onError={(e) => {
-                    e.currentTarget.src = item.fallbackImage;
+                    e.currentTarget.src = getAssetPath(item.fallbackImage);
                   }}
                 />
                 <div

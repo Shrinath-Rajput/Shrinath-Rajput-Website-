@@ -11,6 +11,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { certificatesData } from '../data/certificates';
+import { getAssetPath } from '../utils/assets';
 
 export const Certificates = () => {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -329,7 +330,7 @@ export const Certificates = () => {
                     loading="lazy"
                     onError={(e) => {
                       if (!e.target.src.includes('public/images')) {
-                        e.target.src = `/images/${cert.image.split('/').pop()}`;
+                        e.target.src = getAssetPath(`images/${cert.image.split('/').pop()}`);
                       }
                     }}
                   />
