@@ -512,49 +512,17 @@ export const Certificates = () => {
           aria-modal="true"
           aria-label={selectedCert.title}
           onClick={() => setSelectedCert(null)}
+          className="glass-modal-backdrop"
           style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 9999,
-            backgroundColor: 'rgba(4, 6, 10, 0.88)',
-            backdropFilter: 'blur(28px) saturate(160%)',
-            WebkitBackdropFilter: 'blur(28px) saturate(160%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 'clamp(1rem, 3vw, 2.5rem)',
             animation: 'fadeInPage 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '1080px',
-              maxHeight: '92vh',
-              borderRadius: '26px',
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(15, 20, 30, 0.88) 100%)',
-              backdropFilter: 'blur(32px)',
-              WebkitBackdropFilter: 'blur(32px)',
-              border: '1px solid rgba(255, 255, 255, 0.22)',
-              boxShadow: '0 30px 90px rgba(0, 0, 0, 0.85), inset 0 1.5px 0 rgba(255, 255, 255, 0.35)',
-              display: 'flex',
-              flexDirection: 'column',
-              overflow: 'hidden',
-            }}
+            className="glass-modal-card glass-reflection"
           >
             {/* Modal Header */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '1.25rem clamp(1.25rem, 2.5vw, 2rem)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
-                backgroundColor: 'rgba(10, 14, 22, 0.75)',
-              }}
-            >
+            <div className="glass-modal-header">
               <div>
                 <span
                   style={{
@@ -587,23 +555,11 @@ export const Certificates = () => {
                   href={selectedCert.image}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hide-on-mobile"
+                  className="hide-on-mobile premium-glass-btn"
                   style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '9999px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.18)',
-                    color: '#ffffff',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.78rem',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s',
+                    padding: '0.45rem 1rem',
+                    fontSize: '0.76rem',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.16)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)')}
                 >
                   OPEN ORIGINAL
                   <ExternalLink size={13} />
@@ -642,16 +598,7 @@ export const Certificates = () => {
             </div>
 
             {/* Modal Body: Large readable image view (never cropped) */}
-            <div
-              style={{
-                padding: 'clamp(1rem, 2vw, 1.75rem)',
-                overflowY: 'auto',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(5, 7, 10, 0.94)',
-              }}
-            >
+            <div className="glass-modal-body">
               <img
                 src={selectedCert.image}
                 alt={selectedCert.title}
@@ -659,9 +606,9 @@ export const Certificates = () => {
                   maxWidth: '100%',
                   maxHeight: '74vh',
                   objectFit: 'contain',
-                  borderRadius: '14px',
-                  boxShadow: '0 12px 40px rgba(0, 0, 0, 0.8)',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  borderRadius: '16px',
+                  boxShadow: '0 16px 50px rgba(0, 0, 0, 0.65)',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
                 }}
               />
             </div>

@@ -17,15 +17,15 @@ export const Achievements = () => {
           {personalInfo.achievements.map((item, index) => (
             <div
               key={item.title}
-              className="glass-panel"
+              className="real-glass-card glass-reflection"
               style={{
                 padding: 'clamp(2rem, 4vw, 3rem)',
                 borderRadius: '24px',
-                border: '1px solid rgba(200, 255, 0, 0.25)',
-                background: 'linear-gradient(135deg, rgba(20, 25, 34, 0.8) 0%, rgba(10, 13, 18, 0.95) 100%)',
+                border: '1px solid rgba(200, 255, 0, 0.35)',
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 26, 38, 0.55) 50%, rgba(8, 12, 20, 0.75) 100%)',
                 position: 'relative',
                 overflow: 'hidden',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45), 0 0 35px rgba(200, 255, 0, 0.08), inset 0 1.5px 0 rgba(255, 255, 255, 0.28)',
               }}
             >
               {/* Glowing Corner Aura */}

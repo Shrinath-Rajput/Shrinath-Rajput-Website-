@@ -114,21 +114,238 @@
   z-index: 2;
 }
 
-/* Glassmorphism helpers */
+/* ========================================================
+   UNIVERSAL 100% GLASSMORPHISM DESIGN SYSTEM
+   ======================================================== */
 .glass-panel {
+  position: relative;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.035) 40%,
+    rgba(255, 255, 255, 0.038) 50%,
     rgba(255, 255, 255, 0.015) 100%
+  ) !important;
+  backdrop-filter: blur(26px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 22px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.45),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 24px rgba(255, 255, 255, 0.02) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: hidden;
+}
+
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glass-panel:hover {
+  border-color: rgba(200, 255, 0, 0.45) !important;
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(200, 255, 0, 0.14),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.40) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Home Page Wide Split Section Glass Panels */
+.home-split-card {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(14, 20, 32, 0.55) 45%,
+    rgba(8, 12, 20, 0.75) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 22px;
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.45),
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(200, 255, 0, 0.02),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 28px rgba(255, 255, 255, 0.02) !important;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.home-split-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.015) 75%,
+    transparent 100%
   );
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-split-card:hover {
+  border-color: rgba(200, 255, 0, 0.40) !important;
+  box-shadow:
+    0 32px 85px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(200, 255, 0, 0.08),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Home Role Glass Cards */
+.role-glass-card {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(14, 20, 32, 0.55) 50%,
+    rgba(8, 12, 20, 0.75) 100%
+  ) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 18px;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.22) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: hidden;
+}
+
+.role-glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.role-glass-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(200, 255, 0, 0.50) !important;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(20, 28, 44, 0.65) 50%,
+    rgba(10, 15, 26, 0.85) 100%
+  ) !important;
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(200, 255, 0, 0.18),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.38) !important;
+}
+
+/* Glass Footer */
+.glass-footer {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(14, 20, 32, 0.55) 50%,
+    rgba(8, 12, 20, 0.75) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 22px;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    0 0 30px rgba(200, 255, 0, 0.02),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.22) !important;
+  overflow: hidden;
+}
+
+.glass-footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glass Modal Lightbox */
+.glass-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(4, 6, 10, 0.75) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.glass-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  max-height: 92vh;
+  border-radius: 26px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(18, 24, 38, 0.75) 50%,
+    rgba(8, 12, 20, 0.88) 100%
+  ) !important;
+  backdrop-filter: blur(32px) saturate(170%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(170%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.85),
+    0 0 40px rgba(0, 240, 255, 0.10),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.38) !important;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.glass-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem clamp(1.25rem, 2.5vw, 2rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.glass-modal-body {
+  padding: clamp(1rem, 2vw, 1.75rem);
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 18, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
 }
 
 /* Authentic Glassmorphism Card with Diagonal Specular Reflection & Layered Depth */

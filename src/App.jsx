@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useLenis } from './hooks/useLenis';
 import { CustomCursor } from './components/CustomCursor';
 import { PageLoader } from './components/PageLoader';
@@ -19,16 +19,10 @@ import { ContactPage } from './pages/ContactPage';
 
 function App() {
   const [isReady, setIsReady] = useState(false);
-  const location = useLocation();
-  useLenis();
-
-  const isHome =
-    location.pathname === '/' ||
-    location.pathname === '/Shrinath-Rajput-Website-' ||
-    location.pathname === '/Shrinath-Rajput-Website-/';
+  useLenis();    
 
   return (
-    <div className="relative min-h-screen bg-[#060709] text-white selection:bg-[#c8ff00] selection:text-black">
+    <div className="relative min-h-screen bg-[#05070a] text-white selection:bg-[#c8ff00] selection:text-black">
       <CustomCursor />
       <ScrollToTop />
 
@@ -57,8 +51,8 @@ function App() {
         </Routes>
       </main>
 
-      {/* Branded Footer (Rendered on all inner pages; Home is an exclusive full-screen landing page) */}
-      {!isHome && <Footer />}
+      {/* Wide Glass Footer (Rendered across all pages including Home matching Reference) */}
+      <Footer />
     </div>
   );
 }

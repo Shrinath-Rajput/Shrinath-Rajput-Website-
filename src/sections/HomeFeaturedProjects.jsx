@@ -8,93 +8,87 @@ export const HomeFeaturedProjects = () => {
     {
       id: 'dociq-rag',
       title: 'DOCIQ',
-      badge: 'NLP + RAG',
-      desc: 'Cognitive document understanding and RAG knowledge retrieval pipeline.',
-      tech: ['Python', 'FastAPI', 'LangChain', 'ChromaDB'],
+      desc: 'AI powered document intelligence system',
+      tech: ['React', 'FastAPI', 'AI'],
       image: '/assets/projects/dociq.jpg',
       fallbackImage: '/assets/projects/loan.png',
       link: '/work',
-      badgeColor: '#a855f7',
     },
     {
       id: 'clinsense-ai',
       title: 'ClinSense AI',
-      badge: 'AI + Healthcare',
-      desc: 'AI clinical triage and predictive scheduling system built at MumbaiHacks 2025.',
-      tech: ['Python', 'Scikit-Learn', 'FastAPI', 'Streamlit'],
+      desc: 'Medical image analysis platform',
+      tech: ['Python', 'CNN', 'OpenCV'],
       image: '/assets/projects/clinsense.jpg',
       fallbackImage: '/assets/projects/Ai.jpeg',
       link: '/work',
-      badgeColor: '#38bdf8',
     },
     {
       id: 'arogyamitra-ai',
-      title: 'Arogyamitra',
-      badge: 'Agentic AI',
-      desc: 'Autonomous multilingual healthcare diagnostic assistant & cognitive routing.',
-      tech: ['Agentic AI', 'Python', 'LLMs', 'Healthcare ML'],
+      title: 'Aarogyamitra',
+      desc: 'Healthcare assistant for rural areas',
+      tech: ['ML', 'NLP', 'Web App'],
       image: '/assets/projects/arogyamitra.jpg',
       fallbackImage: '/assets/projects/home.png',
       link: '/work',
-      badgeColor: '#c8ff00',
     },
     {
       id: 'ai-smart-city',
       title: 'AI Smart City Surveillance',
-      badge: 'Computer Vision',
-      desc: 'Real-time vehicle detection, flow telemetry, and surveillance intelligence.',
-      tech: ['YOLO', 'OpenCV', 'PyTorch', 'Deep Learning'],
+      desc: 'Real-time monitoring and threat detection',
+      tech: ['YOLO', 'CV', 'React'],
       image: '/assets/projects/surveillance.jpg',
       fallbackImage: '/assets/projects/DR.jpeg',
       link: '/work',
-      badgeColor: '#10b981',
     },
   ];
 
   return (
     <section
       id="home-projects"
+      className="home-section-container"
       style={{
         width: 'min(98vw, 1860px)',
-        margin: '0 auto 1.75rem',
+        margin: '0 auto 1.25rem',
         position: 'relative',
         zIndex: 10,
         boxSizing: 'border-box',
       }}
     >
       <div
-        className="glass-reflection"
+        className="home-split-card glass-reflection"
         style={{
           width: '100%',
-          borderRadius: '24px',
+          borderRadius: '22px',
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(10, 16, 26, 0.45) 50%, rgba(6, 10, 18, 0.65) 100%)',
           backdropFilter: 'blur(28px) saturate(150%)',
           WebkitBackdropFilter: 'blur(28px) saturate(150%)',
-          border: '1px solid rgba(255, 255, 255, 0.16)',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 255, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
-          padding: 'clamp(1.6rem, 2.5vw, 2.5rem)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 255, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+          padding: 'clamp(1.5rem, 2.4vw, 2.4rem)',
           display: 'grid',
-          gridTemplateColumns: 'minmax(280px, 1fr) minmax(0, 3fr)',
-          gap: 'clamp(1.5rem, 2.8vw, 3.2rem)',
+          gridTemplateColumns: 'minmax(260px, 1fr) minmax(0, 3fr)',
+          gap: 'clamp(1.5rem, 2.5vw, 3rem)',
           alignItems: 'center',
+          boxSizing: 'border-box',
         }}
       >
         {/* Left Side: Header info */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <div>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '0.38rem 1rem',
+                padding: '0.35rem 0.95rem',
                 borderRadius: '9999px',
                 background: 'rgba(200, 255, 0, 0.08)',
                 border: '1px solid rgba(200, 255, 0, 0.35)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.74rem',
+                fontSize: '0.72rem',
                 color: '#c8ff00',
-                letterSpacing: '0.12em',
+                letterSpacing: '0.08em',
                 fontWeight: 700,
               }}
             >
@@ -105,8 +99,8 @@ export const HomeFeaturedProjects = () => {
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2rem, 3vw, 2.8rem)',
-              fontWeight: 800,
+              fontSize: 'clamp(2rem, 3.2vw, 3rem)',
+              fontWeight: 900,
               letterSpacing: '-0.02em',
               color: '#ffffff',
               margin: 0,
@@ -114,55 +108,31 @@ export const HomeFeaturedProjects = () => {
               lineHeight: 1.05,
             }}
           >
-            SELECTED<br />PROJECTS
+            SELECTED<br />
+            <span style={{ color: '#c8ff00' }}>PROJECTS</span>
           </h2>
 
           <p
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: 'clamp(0.88rem, 1.05vw, 0.98rem)',
+              fontSize: 'clamp(0.85rem, 1vw, 0.94rem)',
               color: 'var(--text-muted)',
-              lineHeight: 1.6,
+              lineHeight: 1.55,
               margin: 0,
               maxWidth: '380px',
             }}
           >
             A showcase of my recent work in AI, full-stack development, and computer vision.
           </p>
-
-          <div style={{ paddingTop: '0.5rem' }}>
-            <Link
-              to="/work"
-              className="glass-pill glass-reflection"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '0.55rem 1.25rem',
-                borderRadius: '9999px',
-                backgroundColor: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.16)',
-                color: '#ffffff',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                letterSpacing: '0.06em',
-                textDecoration: 'none',
-                transition: 'all 0.25s ease',
-              }}
-            >
-              VIEW ALL PROJECTS <ArrowUpRight size={14} color="var(--accent-lime)" />
-            </Link>
-          </div>
         </div>
 
-        {/* Right Side: 4 Premium Project Cards */}
+        {/* Right Side: 4 Horizontal Project Cards matching reference */}
         <div
           className="home-projects-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-            gap: 'clamp(0.85rem, 1.3vw, 1.25rem)',
+            gap: 'clamp(0.75rem, 1.2vw, 1.15rem)',
           }}
         >
           {featured.map((item) => (
@@ -172,17 +142,18 @@ export const HomeFeaturedProjects = () => {
               className="project-glass-card glass-reflection"
               style={{
                 position: 'relative',
-                borderRadius: '18px',
+                borderRadius: '16px',
                 background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(14, 20, 32, 0.55) 100%)',
                 backdropFilter: 'blur(20px)',
                 WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.14)',
-                boxShadow: '0 12px 35px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.14)',
+                border: '1px solid rgba(0, 240, 255, 0.20)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
                 textDecoration: 'none',
                 transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                boxSizing: 'border-box',
               }}
             >
               {/* Card Image Frame */}
@@ -208,71 +179,40 @@ export const HomeFeaturedProjects = () => {
                     e.currentTarget.src = getAssetPath(item.fallbackImage);
                   }}
                 />
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    left: '8px',
-                    padding: '0.28rem 0.65rem',
-                    borderRadius: '9999px',
-                    backgroundColor: 'rgba(5, 8, 14, 0.85)',
-                    backdropFilter: 'blur(10px)',
-                    border: `1px solid ${item.badgeColor}40`,
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.62rem',
-                    fontWeight: 700,
-                    color: item.badgeColor,
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {item.badge}
-                </div>
               </div>
 
               {/* Card Body */}
-              <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between' }}>
+              <div
+                style={{
+                  padding: '0.95rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flexGrow: 1,
+                  justifyContent: 'space-between',
+                  gap: '8px',
+                }}
+              >
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                    <h3
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '0.98rem',
-                        fontWeight: 700,
-                        color: '#ffffff',
-                        margin: 0,
-                        lineHeight: 1.25,
-                      }}
-                    >
-                      {item.title}
-                    </h3>
-                    <div
-                      className="project-arrow-btn"
-                      style={{
-                        width: '26px',
-                        height: '26px',
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                        border: '1px solid rgba(255, 255, 255, 0.16)',
-                        color: '#cbd5e1',
-                        flexShrink: 0,
-                        transition: 'all 0.25s ease',
-                      }}
-                    >
-                      <ArrowUpRight size={13} />
-                    </div>
-                  </div>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '0.94rem',
+                      fontWeight: 700,
+                      color: '#ffffff',
+                      margin: '0 0 4px',
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    {item.title}
+                  </h3>
 
                   <p
                     style={{
                       fontFamily: 'var(--font-body)',
-                      fontSize: '0.74rem',
+                      fontSize: '0.72rem',
                       color: 'var(--text-muted)',
-                      lineHeight: 1.4,
-                      margin: '0 0 10px',
+                      lineHeight: 1.35,
+                      margin: 0,
                       display: '-webkit-box',
                       WebkitLineClamp: 2,
                       WebkitBoxOrient: 'vertical',
@@ -283,24 +223,54 @@ export const HomeFeaturedProjects = () => {
                   </p>
                 </div>
 
-                {/* Tech Tags */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                  {item.tech.map((t) => (
-                    <span
-                      key={t}
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.62rem',
-                        color: 'rgba(255, 255, 255, 0.7)',
-                        padding: '2px 7px',
-                        borderRadius: '4px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
+                {/* Bottom Row: Tech Tags on left + Circular Arrow Button on right */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginTop: '4px',
+                  }}
+                >
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                    {item.tech.map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.62rem',
+                          color: '#e2e8f0',
+                          padding: '2px 7px',
+                          borderRadius: '4px',
+                          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                          border: '1px solid rgba(255, 255, 255, 0.10)',
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Circular Arrow Button */}
+                  <div
+                    className="project-arrow-btn"
+                    style={{
+                      width: '24px',
+                      height: '24px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                      border: '1px solid rgba(0, 240, 255, 0.40)',
+                      color: '#38bdf8',
+                      flexShrink: 0,
+                      transition: 'all 0.25s ease',
+                      marginLeft: '6px',
+                    }}
+                  >
+                    <ArrowUpRight size={13} />
+                  </div>
                 </div>
               </div>
             </Link>

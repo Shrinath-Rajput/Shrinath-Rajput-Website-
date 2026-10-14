@@ -9,17 +9,19 @@ export const HeroServiceStrip = () => {
       desc: 'Designing intelligent systems for real-world impact.',
       icon: Zap,
       accent: '#c8ff00',
-      badgeBg: 'rgba(200, 255, 0, 0.14)',
-      badgeBorder: 'rgba(200, 255, 0, 0.45)',
+      badgeBg: 'rgba(200, 255, 0, 0.12)',
+      badgeBorder: '#c8ff00',
+      glow: 'rgba(200, 255, 0, 0.40)',
     },
     {
       num: '02',
       title: 'Full Stack Development',
-      desc: 'Building scalable & modern web applications.',
+      desc: 'Building scalable and modern web applications.',
       icon: Box,
       accent: '#38bdf8',
-      badgeBg: 'rgba(56, 189, 248, 0.14)',
-      badgeBorder: 'rgba(56, 189, 248, 0.45)',
+      badgeBg: 'rgba(56, 189, 248, 0.12)',
+      badgeBorder: '#38bdf8',
+      glow: 'rgba(56, 189, 248, 0.40)',
     },
     {
       num: '03',
@@ -27,17 +29,19 @@ export const HeroServiceStrip = () => {
       desc: 'Solving real-world challenges with AI models.',
       icon: Database,
       accent: '#10b981',
-      badgeBg: 'rgba(16, 185, 129, 0.14)',
-      badgeBorder: 'rgba(16, 185, 129, 0.45)',
+      badgeBg: 'rgba(16, 185, 129, 0.12)',
+      badgeBorder: '#10b981',
+      glow: 'rgba(16, 185, 129, 0.40)',
     },
     {
       num: '04',
       title: 'Agentic AI & Automation',
-      desc: 'Creating autonomous agents for next-gen tech.',
+      desc: 'Creating autonomous agents for next-generation technology.',
       icon: Rocket,
       accent: '#a855f7',
-      badgeBg: 'rgba(168, 85, 247, 0.14)',
-      badgeBorder: 'rgba(168, 85, 247, 0.45)',
+      badgeBg: 'rgba(168, 85, 247, 0.12)',
+      badgeBorder: '#a855f7',
+      glow: 'rgba(168, 85, 247, 0.40)',
     },
   ];
 
@@ -45,8 +49,8 @@ export const HeroServiceStrip = () => {
     <div
       className="hero-service-strip-container"
       style={{
-        width: 'min(98vw, 1860px)',
-        margin: '1.25rem auto 1.75rem',
+        width: '100%',
+        margin: 0,
         position: 'relative',
         zIndex: 10,
         boxSizing: 'border-box',
@@ -58,14 +62,17 @@ export const HeroServiceStrip = () => {
           width: '100%',
           display: 'grid',
           gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-          alignItems: 'stretch',
-          borderRadius: '24px',
-          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 18, 28, 0.48) 50%, rgba(6, 10, 18, 0.65) 100%)',
-          backdropFilter: 'blur(28px) saturate(150%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(150%)',
-          border: '1px solid rgba(255, 255, 255, 0.16)',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45), 0 0 35px rgba(200, 255, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
+          alignItems: 'center',
+          borderRadius: '20px',
+          background:
+            'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 16, 26, 0.60) 50%, rgba(6, 10, 18, 0.82) 100%)',
+          backdropFilter: 'blur(28px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+          border: '1px solid rgba(0, 240, 255, 0.28)',
+          boxShadow:
+            '0 20px 50px rgba(0, 0, 0, 0.60), 0 0 35px rgba(0, 240, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.20)',
           overflow: 'hidden',
+          boxSizing: 'border-box',
         }}
       >
         {services.map((item, index) => {
@@ -79,40 +86,40 @@ export const HeroServiceStrip = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '16px',
-                padding: '1.45rem clamp(1.2rem, 1.8vw, 2.2rem)',
+                gap: '14px',
+                padding: '1.15rem clamp(1rem, 1.6vw, 1.8rem)',
                 position: 'relative',
-                borderRight: isNotLast ? '1px solid rgba(255, 255, 255, 0.10)' : 'none',
+                borderRight: isNotLast ? '1px solid rgba(255, 255, 255, 0.09)' : 'none',
                 transition: 'all 0.3s ease',
               }}
             >
-              {/* Circular Glowing Icon Badge */}
+              {/* Distinct Neon-Glowing Icon Circle */}
               <div
                 style={{
-                  width: '46px',
-                  height: '46px',
+                  width: '44px',
+                  height: '44px',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   backgroundColor: item.badgeBg,
-                  border: `1px solid ${item.badgeBorder}`,
-                  boxShadow: `0 0 18px ${item.badgeBg}`,
+                  border: `1.5px solid ${item.badgeBorder}`,
+                  boxShadow: `0 0 16px ${item.glow}`,
                   flexShrink: 0,
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 }}
               >
-                <IconComponent size={22} color={item.accent} />
+                <IconComponent size={20} color={item.accent} />
               </div>
 
-              {/* Text Info */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', minWidth: 0 }}>
+              {/* Text Info: Numbered label, bold title, short description */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
                 <div
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '0.72rem',
+                    fontSize: '0.70rem',
                     color: item.accent,
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.08em',
                     fontWeight: 700,
                   }}
                 >
@@ -121,13 +128,14 @@ export const HeroServiceStrip = () => {
                 <h3
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(0.92rem, 1.1vw, 1.05rem)',
+                    fontSize: 'clamp(0.88rem, 1.05vw, 1.02rem)',
                     fontWeight: 700,
                     color: '#ffffff',
                     lineHeight: 1.25,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
+                    margin: 0,
                   }}
                 >
                   {item.title}
@@ -135,12 +143,13 @@ export const HeroServiceStrip = () => {
                 <p
                   style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: '0.78rem',
+                    fontSize: '0.76rem',
                     color: 'var(--text-muted)',
-                    lineHeight: 1.4,
+                    lineHeight: 1.35,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
+                    margin: 0,
                   }}
                 >
                   {item.desc}

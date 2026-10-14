@@ -3,10 +3,20 @@
 :root {
   --bg-primary: #06070a;
   --bg-secondary: #0a0c12;
-  --bg-card: rgba(14, 17, 24, 0.7);
-  --bg-glass: rgba(255, 255, 255, 0.025);
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-active: rgba(200, 255, 0, 0.35);
+  --bg-card: rgba(14, 20, 32, 0.55);
+  --bg-glass: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.16);
+  --border-active: rgba(200, 255, 0, 0.45);
+  --border-cyan: rgba(0, 240, 255, 0.35);
+
+  /* 100% Glassmorphism System Tokens */
+  --glass-surface: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.038) 50%, rgba(255, 255, 255, 0.015) 100%);
+  --glass-surface-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.025) 100%);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.18);
+  --glass-border-hover: 1px solid rgba(200, 255, 0, 0.50);
+  --glass-blur: blur(24px) saturate(160%);
+  --glass-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1.5px 0 rgba(255, 255, 255, 0.28), inset 0 0 24px rgba(255, 255, 255, 0.02);
+  --glass-shadow-hover: 0 32px 80px rgba(0, 0, 0, 0.60), 0 12px 30px rgba(0, 0, 0, 0.30), 0 0 35px rgba(200, 255, 0, 0.14), inset 0 1.5px 0 rgba(255, 255, 255, 0.45);
   
   --text-primary: #f8fafc;
   --text-muted: #8e95a5;

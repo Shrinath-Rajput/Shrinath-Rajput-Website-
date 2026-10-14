@@ -1,6 +1,5 @@
 import React from 'react';
 import { Hero } from '../sections/Hero';
-import { HeroServiceStrip } from '../sections/HeroServiceStrip';
 import { HomeRoles } from '../sections/HomeRoles';
 import { HomeTechStack } from '../sections/HomeTechStack';
 import { HomeFeaturedProjects } from '../sections/HomeFeaturedProjects';
@@ -33,7 +32,7 @@ export const HomePage = ({ isReady }) => {
         }}
       />
 
-      {/* Global Ambient Radial Depth Glows (Extending throughout full scroll) */}
+      {/* Global Ambient Radial Depth Glows */}
       <div
         style={{
           position: 'fixed',
@@ -77,32 +76,27 @@ export const HomePage = ({ isReady }) => {
         }}
       />
 
-      {/* 1. Hero Section (Untouched & Preserved) */}
+      {/* 1. Full-Screen Cinematic Hero (Video + Left Name + AI Analytics Dashboards + Floating Bottom Service Strip) */}
       <div style={{ position: 'relative', zIndex: 2 }}>
         <Hero isReady={isReady} />
       </div>
 
-      {/* 2. Feature / Service Strip (01 AI/ML, 02 Full Stack, 03 Vision, 04 Agentic AI) */}
-      <div style={{ position: 'relative', zIndex: 2 }}>
-        <HeroServiceStrip />
-      </div>
-
-      {/* 3. Section 01 // MY ROLES — WHAT I DO */}
-      <div style={{ position: 'relative', zIndex: 2 }}>
+      {/* 2. Section 01 // MY ROLES — WHAT I DO */}
+      <div style={{ position: 'relative', zIndex: 2, marginTop: 'clamp(24px, 3vh, 36px)' }}>
         <HomeRoles />
       </div>
 
-      {/* 4. Section 02 // TECH STACK — TECH STACK */}
+      {/* 3. Section 02 // TECH STACK — TECH STACK */}
       <div style={{ position: 'relative', zIndex: 2 }}>
         <HomeTechStack />
       </div>
 
-      {/* 5. Section 03 // FEATURED WORK — SELECTED PROJECTS */}
+      {/* 4. Section 03 // FEATURED WORK — SELECTED PROJECTS */}
       <div style={{ position: 'relative', zIndex: 2 }}>
         <HomeFeaturedProjects />
       </div>
 
-      {/* 6. Section 04 // FINAL CTA — LET'S BUILD SOMETHING INTELLIGENT */}
+      {/* 5. Section 04 // FINAL CTA — LET'S BUILD SOMETHING INTELLIGENT */}
       <div style={{ position: 'relative', zIndex: 2 }}>
         <HomeCta />
       </div>

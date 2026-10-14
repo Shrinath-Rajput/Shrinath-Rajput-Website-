@@ -35,57 +35,59 @@ export const HomeRoles = () => {
       title: 'Full Stack Developer',
       subtitle: 'Modern Web Apps, APIs, Databases',
       icon: Code2,
-      accent: '#a855f7',
-      badgeBg: 'rgba(168, 85, 247, 0.12)',
-      badgeBorder: 'rgba(168, 85, 247, 0.35)',
+      accent: '#38bdf8',
+      badgeBg: 'rgba(56, 189, 248, 0.12)',
+      badgeBorder: 'rgba(56, 189, 248, 0.35)',
     },
   ];
 
   return (
     <section
       id="home-roles"
+      className="home-section-container"
       style={{
         width: 'min(98vw, 1860px)',
-        margin: '0 auto 1.75rem',
+        margin: '0 auto 1.25rem',
         position: 'relative',
         zIndex: 10,
         boxSizing: 'border-box',
       }}
     >
       <div
-        className="glass-reflection"
+        className="home-split-card glass-reflection"
         style={{
           width: '100%',
-          borderRadius: '24px',
+          borderRadius: '22px',
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(10, 16, 26, 0.45) 50%, rgba(6, 10, 18, 0.65) 100%)',
           backdropFilter: 'blur(28px) saturate(150%)',
           WebkitBackdropFilter: 'blur(28px) saturate(150%)',
-          border: '1px solid rgba(255, 255, 255, 0.16)',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 255, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
-          padding: 'clamp(1.6rem, 2.5vw, 2.5rem)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 255, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+          padding: 'clamp(1.5rem, 2.4vw, 2.4rem)',
           display: 'grid',
-          gridTemplateColumns: 'minmax(280px, 1fr) minmax(0, 3fr)',
-          gap: 'clamp(1.5rem, 2.8vw, 3.2rem)',
+          gridTemplateColumns: 'minmax(260px, 1fr) minmax(0, 3fr)',
+          gap: 'clamp(1.5rem, 2.5vw, 3rem)',
           alignItems: 'center',
+          boxSizing: 'border-box',
         }}
       >
         {/* Left Side: Header info */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {/* Badge */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          {/* Label: 01 // MY ROLES */}
           <div>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '0.38rem 1rem',
+                padding: '0.35rem 0.95rem',
                 borderRadius: '9999px',
                 background: 'rgba(200, 255, 0, 0.08)',
                 border: '1px solid rgba(200, 255, 0, 0.35)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.74rem',
+                fontSize: '0.72rem',
                 color: '#c8ff00',
-                letterSpacing: '0.12em',
+                letterSpacing: '0.08em',
                 fontWeight: 700,
               }}
             >
@@ -93,12 +95,12 @@ export const HomeRoles = () => {
             </div>
           </div>
 
-          {/* Heading */}
+          {/* Heading: WHAT in solid white, I DO in neon-lime outline */}
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2rem, 3vw, 2.8rem)',
-              fontWeight: 800,
+              fontSize: 'clamp(2rem, 3.2vw, 3rem)',
+              fontWeight: 900,
               letterSpacing: '-0.02em',
               color: '#ffffff',
               margin: 0,
@@ -106,16 +108,25 @@ export const HomeRoles = () => {
               lineHeight: 1.05,
             }}
           >
-            WHAT I DO
+            WHAT{' '}
+            <span
+              style={{
+                color: 'transparent',
+                WebkitTextStroke: '2px #c8ff00',
+                filter: 'drop-shadow(0 0 12px rgba(200, 255, 0, 0.35))',
+              }}
+            >
+              I DO
+            </span>
           </h2>
 
           {/* Subtitle */}
           <p
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: 'clamp(0.88rem, 1.05vw, 0.98rem)',
+              fontSize: 'clamp(0.85rem, 1vw, 0.94rem)',
               color: 'var(--text-muted)',
-              lineHeight: 1.6,
+              lineHeight: 1.55,
               margin: 0,
               maxWidth: '380px',
             }}
@@ -130,7 +141,7 @@ export const HomeRoles = () => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-            gap: 'clamp(0.85rem, 1.3vw, 1.25rem)',
+            gap: 'clamp(0.75rem, 1.2vw, 1.15rem)',
           }}
         >
           {roles.map((item) => {
@@ -141,27 +152,27 @@ export const HomeRoles = () => {
                 className="role-glass-card glass-reflection"
                 style={{
                   position: 'relative',
-                  borderRadius: '18px',
+                  borderRadius: '16px',
                   background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(14, 20, 32, 0.55) 100%)',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.14)',
-                  boxShadow: '0 12px 35px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.14)',
-                  padding: '1.35rem 1.15rem',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
+                  padding: '1.25rem 1.1rem',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  minHeight: '154px',
+                  minHeight: '148px',
                   transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                  cursor: 'pointer',
+                  boxSizing: 'border-box',
                 }}
               >
                 {/* Top Row: Icon Badge & Index Number */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.1rem' }}>
                   <div
                     style={{
-                      width: '42px',
-                      height: '42px',
+                      width: '40px',
+                      height: '40px',
                       borderRadius: '50%',
                       display: 'flex',
                       alignItems: 'center',
@@ -172,14 +183,14 @@ export const HomeRoles = () => {
                       flexShrink: 0,
                     }}
                   >
-                    <Icon size={20} color={item.accent} />
+                    <Icon size={19} color={item.accent} />
                   </div>
                   <span
                     style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
+                      fontSize: '0.70rem',
                       color: 'rgba(255, 255, 255, 0.35)',
-                      letterSpacing: '0.08em',
+                      letterSpacing: '0.06em',
                       fontWeight: 700,
                     }}
                   >
@@ -192,7 +203,7 @@ export const HomeRoles = () => {
                   <h3
                     style={{
                       fontFamily: 'var(--font-display)',
-                      fontSize: 'clamp(0.92rem, 1.1vw, 1.05rem)',
+                      fontSize: 'clamp(0.88rem, 1.05vw, 1rem)',
                       fontWeight: 700,
                       color: '#ffffff',
                       marginBottom: '4px',
@@ -204,7 +215,7 @@ export const HomeRoles = () => {
                   <p
                     style={{
                       fontFamily: 'var(--font-mono)',
-                      fontSize: '0.74rem',
+                      fontSize: '0.72rem',
                       color: 'var(--text-muted)',
                       lineHeight: 1.35,
                       margin: 0,

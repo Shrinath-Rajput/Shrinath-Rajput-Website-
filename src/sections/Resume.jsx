@@ -686,9 +686,11 @@ export const Resume = () => {
               height: 'clamp(480px, 70vh, 720px)',
               borderRadius: '18px',
               overflow: 'hidden',
-              backgroundColor: 'rgba(10, 14, 22, 0.95)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.6)',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(10, 14, 22, 0.70) 100%)',
+              backdropFilter: 'blur(24px) saturate(160%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+              border: '1px solid rgba(255, 255, 255, 0.16)',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18)',
             }}
           >
             <iframe

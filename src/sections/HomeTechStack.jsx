@@ -43,7 +43,7 @@ export const HomeTechStack = () => {
       name: 'YOLO',
       icon: null,
       fallbackText: 'YOLO',
-      accent: '#c8ff00',
+      accent: '#ef4444',
     },
     {
       name: 'Scikit-learn',
@@ -84,47 +84,49 @@ export const HomeTechStack = () => {
   return (
     <section
       id="home-stack"
+      className="home-section-container"
       style={{
         width: 'min(98vw, 1860px)',
-        margin: '0 auto 1.75rem',
+        margin: '0 auto 1.25rem',
         position: 'relative',
         zIndex: 10,
         boxSizing: 'border-box',
       }}
     >
       <div
-        className="glass-reflection"
+        className="home-split-card glass-reflection"
         style={{
           width: '100%',
-          borderRadius: '24px',
+          borderRadius: '22px',
           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(10, 16, 26, 0.45) 50%, rgba(6, 10, 18, 0.65) 100%)',
           backdropFilter: 'blur(28px) saturate(150%)',
           WebkitBackdropFilter: 'blur(28px) saturate(150%)',
-          border: '1px solid rgba(255, 255, 255, 0.16)',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 255, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
-          padding: 'clamp(1.6rem, 2.5vw, 2.5rem)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(200, 255, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.16)',
+          padding: 'clamp(1.5rem, 2.4vw, 2.4rem)',
           display: 'grid',
-          gridTemplateColumns: 'minmax(280px, 1fr) minmax(0, 3fr)',
-          gap: 'clamp(1.5rem, 2.8vw, 3.2rem)',
+          gridTemplateColumns: 'minmax(260px, 1fr) minmax(0, 3fr)',
+          gap: 'clamp(1.5rem, 2.5vw, 3rem)',
           alignItems: 'center',
+          boxSizing: 'border-box',
         }}
       >
         {/* Left Side: Header info */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           <div>
             <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '0.38rem 1rem',
+                padding: '0.35rem 0.95rem',
                 borderRadius: '9999px',
-                background: 'rgba(56, 189, 248, 0.08)',
-                border: '1px solid rgba(56, 189, 248, 0.35)',
+                background: 'rgba(200, 255, 0, 0.08)',
+                border: '1px solid rgba(200, 255, 0, 0.35)',
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.74rem',
-                color: '#38bdf8',
-                letterSpacing: '0.12em',
+                fontSize: '0.72rem',
+                color: '#c8ff00',
+                letterSpacing: '0.08em',
                 fontWeight: 700,
               }}
             >
@@ -135,8 +137,8 @@ export const HomeTechStack = () => {
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2rem, 3vw, 2.8rem)',
-              fontWeight: 800,
+              fontSize: 'clamp(2rem, 3.2vw, 3rem)',
+              fontWeight: 900,
               letterSpacing: '-0.02em',
               color: '#ffffff',
               margin: 0,
@@ -150,9 +152,9 @@ export const HomeTechStack = () => {
           <p
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: 'clamp(0.88rem, 1.05vw, 0.98rem)',
+              fontSize: 'clamp(0.85rem, 1vw, 0.94rem)',
               color: 'var(--text-muted)',
-              lineHeight: 1.6,
+              lineHeight: 1.55,
               margin: 0,
               maxWidth: '380px',
             }}
@@ -161,12 +163,12 @@ export const HomeTechStack = () => {
           </p>
         </div>
 
-        {/* Right Side: Multiple rows of technology pills */}
+        {/* Right Side: Multiple rows of compact technology pills matching reference */}
         <div
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '10px 12px',
+            gap: '8px 10px',
             alignItems: 'center',
           }}
         >
@@ -177,8 +179,8 @@ export const HomeTechStack = () => {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px',
-                padding: '0.55rem 1.15rem',
+                gap: '7px',
+                padding: '0.48rem 1.05rem',
                 borderRadius: '9999px',
                 background: tech.isMore
                   ? 'rgba(200, 255, 0, 0.08)'
@@ -187,7 +189,7 @@ export const HomeTechStack = () => {
                 WebkitBackdropFilter: 'blur(16px)',
                 border: tech.isMore
                   ? '1px dashed rgba(200, 255, 0, 0.45)'
-                  : '1px solid rgba(255, 255, 255, 0.14)',
+                  : '1px solid rgba(255, 255, 255, 0.12)',
                 boxShadow: '0 4px 15px rgba(0, 0, 0, 0.25)',
                 transition: 'all 0.25s ease',
                 cursor: 'default',
@@ -198,8 +200,8 @@ export const HomeTechStack = () => {
                   src={tech.icon}
                   alt={tech.name}
                   style={{
-                    width: '18px',
-                    height: '18px',
+                    width: '17px',
+                    height: '17px',
                     objectFit: 'contain',
                     filter: tech.filterInvert ? 'invert(1)' : 'none',
                   }}
@@ -209,17 +211,24 @@ export const HomeTechStack = () => {
                 />
               )}
               {tech.fallbackText && !tech.icon && (
-                <span style={{ fontSize: '0.8rem', color: tech.accent || '#38bdf8', fontWeight: 700 }}>
+                <span
+                  style={{
+                    fontSize: tech.fallbackText === 'YOLO' ? '0.74rem' : '0.85rem',
+                    color: tech.accent || '#38bdf8',
+                    fontWeight: 800,
+                    letterSpacing: tech.fallbackText === 'YOLO' ? '0.04em' : 'normal',
+                  }}
+                >
                   {tech.fallbackText}
                 </span>
               )}
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.82rem',
+                  fontSize: '0.80rem',
                   fontWeight: 600,
                   color: tech.isMore ? 'var(--accent-lime)' : '#f1f5f9',
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.02em',
                 }}
               >
                 {tech.name}

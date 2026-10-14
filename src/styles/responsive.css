@@ -17,6 +17,7 @@ body,
 body {
   overflow-x: hidden;
   position: relative;
+  background-color: #05070a;
 }
 
 /* Ensure no media element can ever exceed its parent container */
@@ -32,26 +33,27 @@ iframe {
 
 /* ========================================================
    GLOBAL FULL-WIDTH LAYOUT SYSTEM: WIDE CINEMATIC VIEWPORT
-   Occupies ~90–94vw on desktop/laptop, eliminating excessive side margins
+   Aligns navbar, hero, service strip, roles, tech stack, projects, CTA, footer
    ======================================================== */
 .site-container,
 .page-container,
 .services-container,
 .about-container,
 .contact-container {
-  width: min(94vw, 1820px);
-  max-width: 1820px;
+  width: min(96vw, 1780px);
+  max-width: 1780px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(24px, 3.5vw, 64px);
-  padding-right: clamp(24px, 3.5vw, 64px);
+  padding-left: clamp(16px, 2.5vw, 40px);
+  padding-right: clamp(16px, 2.5vw, 40px);
   box-sizing: border-box;
 }
 
 .home-section-container,
-.hero-service-strip-container {
-  width: min(98vw, 1860px);
-  max-width: 1860px;
+.hero-service-strip-container,
+.site-footer-container {
+  width: min(96vw, 1780px);
+  max-width: 1780px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
@@ -59,52 +61,11 @@ iframe {
 
 /* Section vertical breathing room */
 .section-padding {
-  padding-top: clamp(6rem, 12vh, 10rem);
-  padding-bottom: clamp(6rem, 12vh, 10rem);
+  padding-top: clamp(4rem, 8vh, 7rem);
+  padding-bottom: clamp(4rem, 8vh, 7rem);
 }
 
-/* Desktop Defaults */
-.hero-main-container {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 46% 54%;
-  align-items: center;
-  gap: 0;
-  box-sizing: border-box;
-}
-
-.portrait-frame {
-  position: relative;
-  width: 100%;
-  max-width: 880px;
-  height: clamp(540px, 75vh, 740px);
-  border-radius: 28px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.portrait-frame video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  display: block;
-}
-
-.hud-panel-bottom {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  max-width: 720px;
-  border-radius: 24px;
-  box-sizing: border-box;
-}
-
-/* Desktop Hover & Cards */
+/* Desktop Hover Effects */
 .role-glass-card:hover {
   transform: translateY(-4px);
   border-color: rgba(200, 255, 0, 0.35) !important;
@@ -120,12 +81,12 @@ iframe {
 
 .project-glass-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(200, 255, 0, 0.40) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(200, 255, 0, 0.12) !important;
+  border-color: rgba(0, 240, 255, 0.45) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.12) !important;
 }
 
 .project-glass-card:hover img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 .project-glass-card:hover .project-arrow-btn {
@@ -147,14 +108,10 @@ iframe {
   .page-container,
   .services-container,
   .about-container,
-  .contact-container {
-    width: min(96vw, 1365px);
-    padding-left: clamp(20px, 3vw, 40px);
-    padding-right: clamp(20px, 3vw, 40px);
-  }
-
+  .contact-container,
   .home-section-container,
-  .hero-service-strip-container {
+  .hero-service-strip-container,
+  .site-footer-container {
     width: min(96vw, 1365px);
   }
 }
@@ -163,77 +120,38 @@ iframe {
    BREAKPOINTS: TABLET PORTRAIT / COMPACT LAPTOPS (<= 1080px)
    ======================================================== */
 @media (max-width: 1080px) {
-  /* Hero stacks vertically */
-  #hero,
-  .hero-section-root {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    padding-top: 5.5rem !important;
-    padding-bottom: 2.5rem !important;
-    min-height: auto !important;
+  .hero-cinematic-stage {
     height: auto !important;
-  }
-
-  .hero-main-container {
+    min-height: 740px !important;
+    padding-bottom: 2rem !important;
     display: flex !important;
     flex-direction: column !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    gap: 2.25rem !important;
-    align-items: center !important;
-    text-align: center !important;
+    justify-content: flex-start !important;
   }
 
-  .hero-left-col {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    padding-right: 0 !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .hero-socials-row {
-    justify-content: center !important;
-    width: 100% !important;
-  }
-
-  .hero-portrait-stage {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
+  .hero-name-overlay-container {
+    position: relative !important;
+    top: auto !important;
     transform: none !important;
-    margin: 0 auto !important;
-    align-items: center !important;
-    justify-content: center !important;
-    order: 2 !important;
+    left: auto !important;
+    margin: 1.5rem auto 1rem !important;
+    padding: 0 1.5rem !important;
   }
 
-  .portrait-frame {
+  .hero-service-strip-floating {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
     width: 100% !important;
-    max-width: min(100%, 380px) !important;
-    aspect-ratio: 9 / 16 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 0 auto !important;
-    border-radius: 22px !important;
+    padding: 0 1.5rem !important;
+    margin-top: auto !important;
   }
 
-  .portrait-frame video {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center 18% !important;
-  }
-
-  /* Home Lower Sections */
-  .home-section-container,
-  .hero-service-strip-container {
-    width: 100% !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    margin: 0 auto 1.5rem !important;
+  .home-split-card {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    padding: 1.75rem 1.4rem !important;
   }
 
   .glass-service-strip {
@@ -245,31 +163,14 @@ iframe {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   }
 
-  #home-roles > div,
-  #home-stack > div,
-  #home-projects > div,
-  #home-cta > div,
-  .home-split-card {
-    grid-template-columns: 1fr !important;
-    gap: 1.75rem !important;
-    padding: 1.75rem 1.5rem !important;
-  }
-
   .home-roles-grid,
   .home-projects-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 1rem !important;
   }
 
-  /* Inner Pages Grids */
-  .cert-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  .ailab-cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
+  .cert-grid,
+  .ailab-cards-grid,
   .skills-matrix-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
@@ -277,28 +178,12 @@ iframe {
   .about-portrait-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
-    align-items: start !important;
   }
 
-  .about-portrait-card {
-    height: auto !important;
-    min-height: unset !important;
-    width: 100% !important;
-    max-width: 600px !important;
-    margin: 0 auto !important;
-  }
-
-  .about-portrait-card > div:first-child {
-    min-height: unset !important;
-    aspect-ratio: 4 / 4.6 !important;
-    max-height: 480px !important;
-    width: 100% !important;
-  }
-
-  .project-showcase-grid {
-    display: flex !important;
+  .footer-top-row {
     flex-direction: column !important;
-    gap: 1.5rem !important;
+    align-items: flex-start !important;
+    gap: 1.25rem !important;
   }
 }
 
@@ -313,30 +198,24 @@ iframe {
   .about-container,
   .contact-container,
   .home-section-container,
-  .hero-service-strip-container {
+  .hero-service-strip-container,
+  .site-footer-container {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  .section-padding {
-    padding-top: clamp(3.5rem, 7vh, 5rem) !important;
-    padding-bottom: clamp(3.5rem, 7vh, 5rem) !important;
-  }
-
   /* Compact Mobile Glass Navbar */
   .glass-navbar {
-    width: calc(100% - 32px) !important;
+    width: calc(100% - 24px) !important;
     max-width: 100% !important;
-    left: 16px !important;
-    transform: none !important;
-    height: 60px !important;
-    top: 12px !important;
-    padding: 0 1.15rem !important;
+    margin: 8px auto 0 !important;
+    height: 54px !important;
+    padding: 0 1rem !important;
   }
 
   .nav-desktop-links {
@@ -352,73 +231,70 @@ iframe {
   }
 
   .mobile-nav-panel {
-    left: 16px !important;
-    right: 16px !important;
-    max-width: calc(100% - 32px) !important;
+    left: 12px !important;
+    right: 12px !important;
+    max-width: calc(100% - 24px) !important;
   }
 
   /* Hero Section Mobile */
-  #hero,
-  .hero-section-root {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    padding-top: 5rem !important;
-    padding-bottom: 2rem !important;
-  }
-
-  .hero-main-container {
-    padding: 0 !important;
-    gap: 1.75rem !important;
-  }
-
-  .portrait-frame {
-    width: 100% !important;
-    max-width: min(100%, 340px) !important;
-    aspect-ratio: 9 / 16 !important;
+  .hero-cinematic-stage {
     height: auto !important;
-    border-radius: 20px !important;
+    min-height: auto !important;
+    padding-bottom: 1.25rem !important;
+    position: relative !important;
   }
 
-  .portrait-frame video {
+  .hero-video-stage-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: clamp(380px, 52vh, 460px) !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-video-stage-wrapper video {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
-    object-position: center 18% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
   }
 
-  /* Decorative Backgrounds contained */
-  .hero-globe-layer {
-    width: 240px !important;
-    height: 240px !important;
-    top: -20px !important;
-    right: -30px !important;
-    opacity: 0.35 !important;
-    pointer-events: none !important;
+  .hero-name-overlay-container {
+    position: absolute !important;
+    top: 1rem !important;
+    left: 14px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
   }
 
-  .hero-neural-layer {
-    display: none !important;
+  .hero-title-line {
+    font-size: clamp(2rem, 9.2vw, 2.8rem) !important;
   }
 
-  .hero-ambient-glow-1,
-  .hero-ambient-glow-2 {
-    display: none !important;
+  .hero-audio-toggle {
+    top: 1rem !important;
+    right: 14px !important;
   }
 
-  .hero-backlight-aura {
-    left: 0 !important;
+  .hero-service-strip-floating {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
     width: 100% !important;
-    height: 100% !important;
+    padding: 0 !important;
+    margin-top: 1rem !important;
   }
 
   /* Hero Service Strip */
   .glass-service-strip {
     grid-template-columns: 1fr !important;
-    border-radius: 20px !important;
+    border-radius: 18px !important;
   }
 
   .service-strip-col {
-    padding: 1.15rem 1rem !important;
+    padding: 1.05rem 1rem !important;
     border-right: none !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   }
@@ -440,59 +316,10 @@ iframe {
   }
 
   .home-cta-heading {
-    font-size: clamp(2rem, 7vw, 3.2rem) !important;
-    word-break: break-word !important;
+    font-size: clamp(1.8rem, 6.5vw, 2.8rem) !important;
   }
 
-  /* About Mobile Stack */
-  .about-title-br {
-    display: none !important;
-  }
-
-  .about-hero-title {
-    font-size: clamp(1.6rem, 5.4vw, 2.25rem) !important;
-    line-height: 1.15 !important;
-    word-break: break-word !important;
-  }
-
-  .about-education-grid,
-  .about-courses-grid,
-  .about-focus-grid,
-  .about-methods-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-
-  /* Services Mobile Stack */
-  #what-i-do h2 {
-    font-size: clamp(2rem, 7vw, 3.8rem) !important;
-  }
-
-  .what-we-do-row {
-    grid-template-columns: 1fr !important;
-    gap: 1.15rem !important;
-    padding: 1.35rem 1rem !important;
-    border-radius: 18px !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .service-glass-panel {
-    padding: 1.4rem 1.15rem !important;
-    border-radius: 18px !important;
-  }
-
-  .service-panel-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
-  }
-
-  /* Stack, AI Lab & Certificates */
-  #skills h2,
-  #ai-showcase h2,
-  #certificates h2 {
-    font-size: clamp(2rem, 7vw, 3.5rem) !important;
-  }
-
+  /* Inner Pages */
   .cert-grid,
   .ailab-cards-grid,
   .skills-matrix-grid {
@@ -500,74 +327,21 @@ iframe {
     gap: 1.15rem !important;
   }
 
-  /* Work / Projects */
-  .project-glass-card {
-    padding: 1.35rem 1rem !important;
-    border-radius: 20px !important;
-  }
-
-  .project-filter-row {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    padding-bottom: 8px !important;
-    margin-bottom: 1.75rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    scrollbar-width: none !important;
-  }
-
-  .project-filter-row::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  .project-filter-btn {
-    flex-shrink: 0 !important;
-    white-space: nowrap !important;
-    padding: 0.5rem 0.95rem !important;
-    font-size: 0.72rem !important;
-  }
-
-  /* Resume */
-  #resume h1 {
-    font-size: clamp(2.2rem, 8vw, 4rem) !important;
-  }
-
-  .resume-action-buttons {
-    width: 100% !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-  }
-
-  .resume-action-buttons a {
-    width: 100% !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Contact */
-  #contact h2 {
-    font-size: clamp(2rem, 8vw, 3.6rem) !important;
-    line-height: 1.05 !important;
-    word-break: break-word !important;
-  }
-
-  .contact-main-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-  }
-
-  .contact-glass-panel {
-    padding: 1.4rem 1.1rem !important;
-    border-radius: 20px !important;
-  }
-
   /* Footer on Mobile */
-  footer .site-container > div {
+  .footer-top-row {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 1.25rem !important;
+    gap: 1rem !important;
+  }
+
+  .footer-nav-links {
+    gap: 0.5rem 1rem !important;
+  }
+
+  .footer-bottom-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
   }
 }
 
@@ -575,85 +349,21 @@ iframe {
    BREAKPOINTS: SMALL MOBILE PHONES (<= 480px & <= 375px)
    ======================================================== */
 @media (max-width: 480px) {
-  .hero-name-title {
-    font-size: clamp(1.95rem, 11vw, 2.9rem) !important;
-  }
-
-  .hero-action-buttons {
-    width: 100% !important;
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-  }
-
-  .hero-action-buttons a {
-    width: 100% !important;
-    justify-content: center !important;
-    padding: 0.75rem 1.25rem !important;
-    box-sizing: border-box !important;
-  }
-
-  .portrait-frame {
-    max-width: min(100%, 320px) !important;
-  }
-
-  .hud-panel-bottom {
-    width: 95% !important;
-    max-width: 300px !important;
-    bottom: 8px !important;
-    padding: 0.5rem 0.4rem !important;
-    border-radius: 14px !important;
-  }
-
-  .hud-panel-bottom span:first-child {
-    font-size: 1.05rem !important;
-  }
-
-  .hud-panel-bottom span:last-child {
-    font-size: 0.5rem !important;
-    letter-spacing: 0.04em !important;
-    margin-top: 2px !important;
-  }
-
-  .hero-live-controls {
-    top: 10px !important;
-    right: 10px !important;
-    gap: 6px !important;
-  }
-
-  .hero-live-controls .glass-pill,
-  .hero-live-controls button {
-    padding: 0.32rem 0.65rem !important;
-    font-size: 0.64rem !important;
+  .hero-title-line {
+    font-size: clamp(1.9rem, 8.8vw, 2.6rem) !important;
   }
 
   .glass-tech-chip {
-    padding: 0.42rem 0.8rem !important;
-    font-size: 0.72rem !important;
+    padding: 0.42rem 0.85rem !important;
+    font-size: 0.74rem !important;
   }
 
   .home-cta-heading {
-    font-size: clamp(1.75rem, 8vw, 2.4rem) !important;
-  }
-
-  .project-card-actions {
-    flex-direction: column !important;
-    width: 100% !important;
-  }
-
-  .project-card-actions a,
-  .project-card-actions button {
-    width: 100% !important;
-    justify-content: center !important;
-  }
-
-  .contact-method-btn {
-    width: 100% !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem) !important;
   }
 }
 
-/* Specific optimization for 375px and 320px ultra-compact phones (iPhone SE, etc.) */
+/* Specific optimization for 390px, 375px, and ultra-compact phones (iPhone SE, etc.) */
 @media (max-width: 390px) {
   .site-container,
   .page-container,
@@ -661,42 +371,20 @@ iframe {
   .about-container,
   .contact-container,
   .home-section-container,
-  .hero-service-strip-container {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
+  .hero-service-strip-container,
+  .site-footer-container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 
   .glass-navbar {
-    width: calc(100% - 24px) !important;
-    left: 12px !important;
-    padding: 0 0.85rem !important;
+    width: calc(100% - 20px) !important;
+    margin: 6px auto 0 !important;
+    padding: 0 0.75rem !important;
   }
 
-  .hero-name-title {
-    font-size: clamp(1.8rem, 11vw, 2.5rem) !important;
-  }
-
-  .portrait-frame {
-    max-width: min(100%, 295px) !important;
-  }
-
-  .hud-panel-bottom {
-    width: 96% !important;
-    max-width: 280px !important;
-    padding: 0.45rem 0.35rem !important;
-  }
-
-  .hud-panel-bottom span:first-child {
-    font-size: 0.95rem !important;
-  }
-
-  .hud-panel-bottom span:last-child {
-    font-size: 0.46rem !important;
-    letter-spacing: 0.03em !important;
-  }
-
-  .project-glass-card {
-    padding: 1.15rem 0.85rem !important;
+  .hero-title-line {
+    font-size: clamp(1.75rem, 9vw, 2.3rem) !important;
   }
 }
 
@@ -706,7 +394,7 @@ iframe {
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
