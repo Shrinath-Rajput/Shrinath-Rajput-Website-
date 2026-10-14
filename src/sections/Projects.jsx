@@ -107,6 +107,7 @@ export const Projects = () => {
             className="project-filter-row"
             style={{
               display: 'flex',
+              flexWrap: 'wrap',
               gap: '8px',
               marginBottom: 'clamp(1.5rem, 3vh, 3rem)',
             }}

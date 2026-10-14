@@ -7,11 +7,14 @@ export const CustomCursor = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPointer, setIsPointer] = useState(false);
 
+  const [enabled, setEnabled] = useState(false);
+
   useEffect(() => {
-    // Only activate cursor on devices supporting pointer hover
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // Only activate cursor on desktop devices supporting fine pointer hover
+    if (window.matchMedia('(pointer: coarse)').matches || !window.matchMedia('(hover: hover)').matches) {
       return;
     }
+    setEnabled(true);
 
     const dot = cursorDotRef.current;
     const ring = cursorRingRef.current;
@@ -52,6 +55,8 @@ export const CustomCursor = () => {
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
+
+  if (!enabled) return null;
 
   return (
     <>

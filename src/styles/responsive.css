@@ -61,8 +61,33 @@ iframe {
 
 /* Section vertical breathing room */
 .section-padding {
-  padding-top: clamp(4rem, 8vh, 7rem);
-  padding-bottom: clamp(4rem, 8vh, 7rem);
+  padding-top: clamp(3.5rem, 7vh, 6.5rem);
+  padding-bottom: clamp(3.5rem, 7vh, 6.5rem);
+}
+
+/* Base Responsive Grids for About Section */
+.about-education-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.about-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.about-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.about-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
 }
 
 /* Desktop Hover Effects */
@@ -114,15 +139,29 @@ iframe {
   .site-footer-container {
     width: min(96vw, 1365px);
   }
+
+  .about-courses-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
 }
 
 /* ========================================================
-   BREAKPOINTS: TABLET PORTRAIT / COMPACT LAPTOPS (<= 1080px)
+   BREAKPOINTS: TABLET PORTRAIT & COMPACT LAPTOPS (<= 1080px)
+   Covers: 1024×768, 820×1180, 768×1024, 600×960
    ======================================================== */
 @media (max-width: 1080px) {
+  /* Clean tablet navigation: switch to mobile drawer */
+  .nav-desktop-links {
+    display: none !important;
+  }
+
+  .nav-mobile-toggle {
+    display: flex !important;
+  }
+
   .hero-cinematic-stage {
     height: auto !important;
-    min-height: 740px !important;
+    min-height: 700px !important;
     padding-bottom: 2rem !important;
     display: flex !important;
     flex-direction: column !important;
@@ -176,6 +215,33 @@ iframe {
   }
 
   .about-portrait-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .about-education-grid,
+  .about-focus-grid,
+  .about-methods-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
+
+  .about-courses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.15rem !important;
+  }
+
+  .project-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .service-panel-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.75rem !important;
+  }
+
+  .contact-main-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
   }
@@ -319,12 +385,53 @@ iframe {
     font-size: clamp(1.8rem, 6.5vw, 2.8rem) !important;
   }
 
-  /* Inner Pages */
+  /* Inner Pages: Complete 1-Column Responsive Collapses */
+  .about-education-grid,
+  .about-courses-grid,
+  .about-focus-grid,
+  .about-methods-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.15rem !important;
+  }
+
+  .project-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .service-panel-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .contact-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
   .cert-grid,
   .ailab-cards-grid,
   .skills-matrix-grid {
     grid-template-columns: 1fr !important;
     gap: 1.15rem !important;
+  }
+
+  .project-filter-row {
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .resume-action-buttons {
+    width: 100% !important;
+  }
+
+  .view-resume-btn,
+  .download-resume-btn {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0.75rem 1.2rem !important;
+    font-size: 0.82rem !important;
   }
 
   /* Footer on Mobile */
@@ -361,9 +468,24 @@ iframe {
   .home-cta-heading {
     font-size: clamp(1.6rem, 7.5vw, 2.2rem) !important;
   }
+
+  .real-glass-card,
+  .glass-card,
+  .resume-glass-card,
+  .contact-glass-panel,
+  .home-split-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 18px !important;
+  }
+
+  .view-resume-btn,
+  .download-resume-btn {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
 }
 
-/* Specific optimization for 390px, 375px, and ultra-compact phones (iPhone SE, etc.) */
+/* Specific optimization for 390px, 375px, and ultra-compact phones (iPhone SE, 320px etc.) */
 @media (max-width: 390px) {
   .site-container,
   .page-container,
@@ -385,6 +507,33 @@ iframe {
 
   .hero-title-line {
     font-size: clamp(1.75rem, 9vw, 2.3rem) !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .site-container,
+  .page-container,
+  .services-container,
+  .about-container,
+  .contact-container,
+  .home-section-container,
+  .hero-service-strip-container,
+  .site-footer-container {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  .real-glass-card,
+  .glass-card,
+  .resume-glass-card,
+  .contact-glass-panel,
+  .home-split-card {
+    padding: 1rem 0.75rem !important;
+    border-radius: 14px !important;
+  }
+
+  .hero-title-line {
+    font-size: clamp(1.5rem, 8.5vw, 1.9rem) !important;
   }
 }
 
